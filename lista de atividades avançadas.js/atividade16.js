@@ -1,64 +1,117 @@
-let numerodopedido = [];
-
-let intervalo1 = 0;
-let intervalo2 = 0;
-let intervalo3 = 0;
-let intervalo4 = 0;
 const prompt = require("prompt-sync")();
 
-let pedidos = [];
+let pedido = [];
 let opcao = '';
 
-while (opcao !== '3') {
+while (opcao !== '5') {
+
     console.log("\n===== MENU =====");
     console.log("1 - Cadastrar");
     console.log("2 - Listar");
-    console.log("3 - Sair;relatorio final");
+    console.log("3 - Dashboard analítico gerencial");
+    console.log("4 - Buscar pedido");
+    console.log("5 - Sair");
+
     opcao = prompt('Opção: ');
 
     if (opcao === '1') {
+
         let quantidade = Number(prompt("Quantos pedidos você deseja cadastrar? "));
 
         for (let i = 0; i < quantidade; i++) {
-            let pedidos = prompt('Digite o nome: ');
-            let numeros = Number(prompt('Digite numero: '));
 
-            pedido.push({ nome, nota });
+            let numerodopedido = Number(prompt('Digite o numero do pedido: '));
+            let material = prompt('Digite o nome do material: ');
+            let quantidade1 = Number(prompt('Digite a quantidade de material: '));
+            let tipodoproduto = prompt('Digite o tipo do produto: ');
+            let prazos = Number(prompt("Digite o prazo: "));
+
+            pedido.push({ numerodopedido, material, quantidade1, tipodoproduto, prazos });
         }
 
     } else if (opcao === '2') {
 
-        if (alunos.length === 0) {
-            console.log("Nenhum aluno cadastrado.");
+        if (pedido.length === 0) {
+            console.log("Nenhum pedido cadastrado.");
         } else {
-            for (let i = 0; i < alunos.length; i++) {
-                if (alunos[i].nota >= 7) {
-                    console.log(`O aluno ${alunos[i].nome} está aprovado`);
-                } else {
-                    console.log(`O aluno ${alunos[i].nome} está reprovado`);
-                }
+
+            let intervalo1 = 0;
+            let intervalo2 = 0;
+            let intervalo3 = 0;
+            let intervalo4 = 0;
+
+            for (let i = 0; i < pedido.length; i++) {
+
+                let dias = pedido[i].prazos;
+
+                if (dias <= 2) 
+                intervalo1++;
+                else if (dias <= 5) 
+                intervalo2++;
+                else if (dias <= 10)
+                intervalo3++;
+                else intervalo4++;
+
+                console.log("\n--- Pedido ---");
+                console.log(pedido[i]);
+            }
+
+            console.log("\n===== RELATÓRIO =====");
+            console.log("Zona vermelha:", intervalo1);
+            console.log("Zona laranja:", intervalo2);
+            console.log("Zona amarela:", intervalo3);
+            console.log("Zona verde:", intervalo4);
+        }
+
+    } else if (opcao === '3') {
+
+        if (pedido.length === 0) {
+            console.log("Nenhum dado para análise.");
+        } else {
+
+            let soma = 0;
+
+            for (let i = 0; i < pedido.length; i++) {
+                soma += pedido[i].quantidade1;
+            }
+
+            console.log("Total de materiais:", soma);
+
+            let pedidosUrgentes = pedido.filter(p => p.prazos <= 2).length;
+            console.log("Pedidos urgentes:", pedidosUrgentes);
+
+            let maiorPedido = Math.max(...pedido.map(p => p.quantidade1));
+            console.log("Maior pedido:", maiorPedido);
+        }
+
+    } else if (opcao === '4') {
+
+        let busca = Number(prompt("Digite o número do pedido: "));
+        let encontrado = false;
+
+        for (let i = 0; i < pedido.length; i++) {
+            if (pedido[i].numerodopedido === busca) {
+                console.log("\n--- PEDIDO ENCONTRADO ---");
+                console.log(pedido[i]);
+                encontrado = true;
+                break;
             }
         }
 
-    } else if (opcao !== '3') {
+        if (!encontrado) {
+            console.log("Pedido não encontrado.");
+        }
+
+    } else if (opcao !== '5') {
         console.log("Opção inválida!");
+
+
+
+
+
+
+
+
+        
     }
 }
-for (let i = 0; i < numeros.length; i++) {
-    let num = numeros[i];
-
-    if (num <= 25) {
-        intervalo1++;
-    } else if (num <= 50) {
-        intervalo2++;
-    } else if (num <= 75) {
-        intervalo3++;
-    } else if (num <= 100) {
-        intervalo4++;
-    }
-}
-
-console.log("Dentro do Intervalo 1 (<=25) Tem:", intervalo1);
-console.log("Dentro do Intervalo 2 (26-50) tem:", intervalo2);
-console.log("Dentro do Intervalo 3 (51-75) tem:", intervalo3);
-console.log("Dentro do Intervalo 4 (76-100) tem:", intervalo4);
