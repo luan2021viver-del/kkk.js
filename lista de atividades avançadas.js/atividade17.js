@@ -48,21 +48,20 @@ while (opcao !== '6') {
 
     } else if (opcao === '4') {
 
-        let busca = Number(prompt("Digite o número: "));
-        let encontrado = false;
+       let busca = Number(prompt("Digite o número que deseja buscar: "));
+      let encontrado = false;
 
         for (let i = 0; i < numero.length; i++) {
-            if (numero[i] === busca) {
-                console.log("\n--- NÚMERO ENCONTRADO ---");
-                console.log(numero[i]);
-                encontrado = true;
-                break;
-            }
+        if (numero[i] === busca) {
+            console.log(`Número encontrado na posição ${i}`);
+            encontrado = true;
+        }
         }
 
         if (!encontrado) {
-            console.log("Não encontrado.");
+        console.log("Não encontrado.");
         }
+        
 
     } else if (opcao === '5') {
 
@@ -82,6 +81,9 @@ while (opcao !== '6') {
     } else if (opcao !== '6') {
 
         console.log("Opção inválida!");
+
+    }
+}
 
     }
 }
