@@ -1,13 +1,17 @@
-function Vinteiro(valor){
-    return valor;
+
+function testandoPositivo(valor){
+    if (valor >= 0){
+        return true;
+  } else  {
+      return false;
+  }
 }
 
-let valor = Number(prompt("Digite o valor: "));
+let valor = parseInt(prompt("Digite o valor: "));
 
-if (valor > 0) {
-    console.log("Valor positivo (True)", valor);
-} else if (valor < 0) {
-    console.log("Valor negativo (False)", valor);
+if (testandoPositivo(valor)) {
+    console.log("O valor é positivo", valor);
+
 } else {
-    console.log("Valor é zero", valor);
-}-
+    console.log("O valor é negativo", valor);
+}
