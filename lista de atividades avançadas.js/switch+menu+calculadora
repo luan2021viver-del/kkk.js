@@ -1,0 +1,86 @@
+let vetor = [];
+
+// Preenchimento inicial básico
+console.log("Preencha o vetor com 5 números:");
+for (let i = 0; i < 5; i++) {
+    let entrada = prompt("Digite o " + (i + 1) + "º número:");
+    vetor[i] = Number(entrada);
+}
+
+function menu(vetor) {
+    let opcao;
+
+    do {
+        // Menu simples com texto normal
+        console.log("\n===== MENU =====");
+        console.log("1. Soma do vetor");
+        console.log("2. Produto do vetor");
+        console.log("3. Multiplicar todos por 5");
+        console.log("4. Mudar elemento");
+        console.log("5. Ordenar vetor");
+        console.log("6. Inverter vetor");
+        console.log("7. Mostrar vetor");
+        console.log("0. Sair");
+
+        opcao = Number(prompt("Escolha uma opção (0-7):"));
+
+        if (opcao === 1) {
+            let soma = 0;
+            for (let i = 0; i < vetor.length; i++) {
+                soma = soma + vetor[i];
+            }
+            alert("A soma é: " + soma);
+
+        } else if (opcao === 2) {
+            let produto = 1;
+            for (let i = 0; i < vetor.length; i++) {
+                produto = produto * vetor[i];
+            }
+            alert("O produto é: " + produto);
+
+        } else if (opcao === 3) {
+            for (let i = 0; i < vetor.length; i++) {
+                vetor[i] = vetor[i] * 5;
+            }
+            alert("Todos os números foram multiplicados por 5!");
+
+        } else if (opcao === 4) {
+            let pos = Number(prompt("Qual posição mudar (0 a 4)?"));
+            if (pos >= 0 && pos <= 4) {
+                let novoValor = Number(prompt("Digite o novo valor:"));
+                vetor[pos] = novoValor;
+            } else {
+                alert("Posição inválida!");
+            }
+
+        } else if (opcao === 5) {
+            // Bubble Sort (Lógica manual de ordenação)
+            for (let i = 0; i < vetor.length; i++) {
+                for (let j = 0; j < vetor.length - 1; j++) {
+                    if (vetor[j] > vetor[j + 1]) {
+                        let auxiliar = vetor[j];
+                        vetor[j] = vetor[j + 1];
+                        vetor[j + 1] = auxiliar;
+                    }
+                }
+            }
+            alert("Vetor ordenado!");
+
+        } else if (opcao === 6) {
+            vetor.reverse();
+            alert("Vetor invertido!");
+
+        } else if (opcao === 7) {
+            alert("Vetor atual: " + vetor);
+
+        } else if (opcao === 0) {
+            alert("Saindo do programa...");
+
+        } else {
+            alert("Opção inválida!");
+        }
+
+    } while (opcao !== 0);
+}
+
+menu(vetor);
