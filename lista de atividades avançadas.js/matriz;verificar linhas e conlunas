@@ -1,1 +1,15 @@
+let linhas = 3;
+let colunas = 3;
+let contador = 2;
 
+let matriz = [ ];
+
+for (let i = 0; i < linhas; i++) {
+    matriz[i] = [];
+    
+    for (let j = 0; j < colunas; j++) {
+        matriz[i][j] = contador;
+        contador++;
+    }
+}
+console.log(matriz);
