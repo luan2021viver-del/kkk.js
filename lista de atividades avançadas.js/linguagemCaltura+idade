@@ -1,0 +1,11 @@
+#include <stdio.h>
+int main() {
+   
+int idade1 = 20;
+float altura1 = 1.75;
+char letra = 'A';
+printf("Idade: %d\n", idade1);
+printf("altura1: %.2f\n", altura1);
+printf("Letra: %c\n", letra);
+    
+}
