@@ -2,22 +2,31 @@
 int main() {
    
 float notas[5];
-float soma = 0,media;
-float maior; 
-float nome;
-    
+int soma = 0,media;
+float maior = 0;
+
+int aprovados = 0,reprovados = 0;
  for(int i=0; i<5; i++) {
-     printf("Digite a nota: ");
- scanf("%f", &notas[i]);
-   soma=+notas[i];
+     printf("Digite a nota: ", i + 1);
+     scanf("%f", &notas[i]);
+     soma=+notas[i];
+      if(notas[i] >= 6) {
+        aprovados++;
+      } else {
+          reprovados++;
+      }
+     for(int i = 0; i < 5; i++){
+         if(notas[i] > maior){
+             maior = notas[i];
+         }
+     }
+     
  }
-
-    printf("Digite o nome: ");
-    scanf("%s", &nome);
-
-    
-media = soma/ 5;
- printf("A media foi %d",media);
+printf("A quantidade de aprovados foram: %d\n", aprovados);
+printf("A quantidade de reprovados foram: %d\n", reprovados);
+printf("A maior nota foi: %.2f\n",maior);
+media = soma/5;
+ printf("A media foi: %.2f\n",media);
 
     return 0;
 }
