@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+#define ALUNOS 3
+#define DISC   3
+
+int main() {
+ float notas[ALUNOS][DISC];
+ 
+ float soma = 0,media;
+ int ALUNOS = 3;
+ int DISC = 3;
+ int min = 0;
+ int max = 10;
+ 
+ 
+ function gerarMatrizesAleatoria(DISC,ALUNOS,min,max){
+ let matriz = [ ];
+for (let i = 0; i < DISC; i++) {
+    matriz[i] = [];
+    
+    for (let j = 0; j < ALUNOS; j++) {
+        matriz[i][j] = Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+}
+return matriz;
+}
+printf(gerarMatrizesAleatoria(DISC,ALUNOS,min,max));
