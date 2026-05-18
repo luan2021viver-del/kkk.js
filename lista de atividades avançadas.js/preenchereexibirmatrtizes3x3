@@ -1,0 +1,47 @@
+
+#include <stdio.h>
+
+int main()
+{
+    int mat[3][3];
+   
+    printf("Digite os elementos da matriz 3x3: ");
+
+for(int i=0;i<3;i++){
+  for(int j=0;j<3;j++){
+    printf("Elemento [%d][%d]: ", i, j);
+    scanf("%d", &mat[i][j]);
+   
+}  
+}
+    printf("\nMATRIZ: \n");
+    for(int i=0;i<3;i++){
+        for(int j=0;j<3;j++){
+               printf("%d", mat[i][j]);
+        }  
+     printf("\n");
+}
+     printf("\nLINHA 1: \n");
+     for(int j=0;j<3;j++){
+               printf("%d ", mat[1][j]);
+        }
+       
+       
+     printf("\nCOLUNA 2: \n");
+     for(int i=0;i<3;i++){
+               printf("%d ", mat[i][2]);
+        }
+       
+         printf("\nDIAGONAL PRINCIPAL: \n");
+     for(int i=0;i<3;i++){
+               printf("%d ", mat[i][i]);
+        }
+       
+         printf("\nDIAGONAL SECUNDÁRIA: \n");
+     for(int i=0;i<3;i++){
+               printf("%d ", mat[i][2-i]);
+        }
+       
+   
+    return 0;
+}
