@@ -1,0 +1,28 @@
+#include <stdio.h>
+
+int main() {
+    float nota;
+
+    printf("Digite a nota: ");
+    scanf("%f", &nota);
+
+    printf("\nA nota: %.2f\n", nota);
+
+    if (nota < 0.0 || nota > 10.0) {
+        printf("Classificacao: nota invalida \n");
+    } 
+    else if (nota < 5.0) { 
+        printf("Classificacao: insuficiente \n");
+    } 
+    else if (nota < 7.0) { 
+        printf("Classificacao: regular \n");
+    } 
+    else if (nota < 9.0) { 
+        printf("Classificacao: bom \n");
+    } 
+    else { 
+        printf("Classificacao: excelente \n");
+    } 
+
+    return 0;
+}
