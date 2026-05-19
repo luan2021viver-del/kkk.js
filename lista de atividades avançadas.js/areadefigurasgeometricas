@@ -1,0 +1,42 @@
+#include <stdio.h>
+#define Pi 3.14159
+
+int main() {
+    float circulo, retangulo, triangulo,R,Base,Altura,Base1,Altura1;
+
+    printf("Digite o R(raio): ");
+    scanf("%f", &R);
+
+
+    printf("Digite o tamanho da base do retangulo: ");
+    scanf("%f", &Base);
+    
+    
+    printf("Digite a altura do retangulo: ");
+    scanf("%f", &Altura);
+
+ printf("Digite o tamanho da base do triangulo: ");
+    scanf("%f", &Base1);
+    
+    
+ printf("Digite a altura do triangulo: ");
+    scanf("%f", &Altura1);
+    
+    
+
+    circulo = Pi * R * R;
+    retangulo = Base * Altura;
+    triangulo = Base1 * Altura1/2;
+    
+    
+
+    printf("\nO calculo do circulo: %.2f",circulo );
+
+   
+printf("\n:O calculo do triangulo: %.2f",triangulo );
+    
+ printf("\nO calculo do retangulo %.2f",retangulo);
+    
+
+    return 0;
+}
