@@ -1,0 +1,26 @@
+#include <stdio.h>
+
+int main() {
+    int secreto = -20;
+    int chute;
+    int tentativas = 0;
+
+    while (chute != secreto) {
+        printf("Digite um numero: ");
+        scanf("%d", &chute);
+
+        tentativas++;
+
+        if (chute > secreto) {
+            printf("Muito alto!\n");
+        } else if (chute < secreto) {
+            printf("Muito baixo!\n");
+        } else {
+            printf("Acertou!\n");
+        }
+    }
+
+    printf("Tentativas: %d\n", tentativas);
+
+    return 0;
+}
