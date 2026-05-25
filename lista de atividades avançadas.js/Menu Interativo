@@ -1,0 +1,60 @@
+#include <stdio.h>
+
+int main() {
+    int opcao, numero, base, expoente, resultado, i;
+
+    do {
+        printf("\n1 - Calcular quadrado de um numero\n");
+        printf("2 - Verificar se numero e par ou impar\n");
+        printf("3 - Calcular potencia\n");
+        printf("4 - Sair\n");
+        printf("Escolha uma opcao: ");
+        scanf("%d", &opcao);
+
+        switch(opcao) {
+            case 1:
+                printf("Digite um numero: ");
+                scanf("%d", &numero);
+
+                printf("Quadrado = %d\n", numero * numero);
+                break;
+
+            case 2:
+                printf("Digite um numero: ");
+                scanf("%d", &numero);
+
+                if(numero % 2 == 0) {
+                    printf("Numero par\n");
+                } else {
+                    printf("Numero impar\n");
+                }
+                break;
+
+            case 3:
+                printf("Digite a base: ");
+                scanf("%d", &base);
+
+                printf("Digite o expoente: ");
+                scanf("%d", &expoente);
+
+                resultado = 1;
+
+                for(i = 1; i <= expoente; i++) {
+                    resultado *= base;
+                }
+
+                printf("Resultado = %d\n", resultado);
+                break;
+
+            case 4:
+                printf("Saindo...\n");
+                break;
+
+            default:
+                printf("Opcao invalida\n");
+        }
+
+    } while(opcao != 4);
+
+    return 0;
+}
