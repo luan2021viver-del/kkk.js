@@ -1,0 +1,36 @@
+#include <stdio.h>
+// Digitar os valores no vetor
+int main() {
+    int mat[3][3];
+    int i, j, soma = 0, somaLinha;
+
+    for(i = 0; i < 3; i++) {
+        for(j = 0; j < 3; j++) {
+            printf("Digite um valor: ");
+            scanf("%d", &mat[i][j]);
+
+            soma += mat[i][j];
+        }
+    }
+
+    printf("\nMatriz:\n");
+//somar as linhas e colunas
+    for(i = 0; i < 3; i++) {
+        somaLinha = 0;
+    
+        for(j = 0; j < 3; j++) {
+            printf("%d\t", mat[i][j]);
+
+            somaLinha += mat[i][j];
+        }
+
+        printf("= %d", somaLinha);
+        printf("\n");
+    }
+
+    printf("\nSoma total = %d\n", soma);
+
+    return 0;
+}
+
+//reultado da soma das linhas
