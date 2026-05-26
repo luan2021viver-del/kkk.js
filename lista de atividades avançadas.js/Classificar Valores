@@ -1,0 +1,38 @@
+#include <stdio.h>
+
+int main() {
+    int v[10], i;
+    int cPos = 0, cNeg = 0, cZero = 0;
+    int somaPos = 0, somaNeg = 0;
+    float mediaNeg;
+
+    for(i = 0; i < 10; i++) {
+        printf("Digite um valor: ");
+        scanf("%d", &v[i]);
+
+        if(v[i] > 0) {
+            cPos++;
+            somaPos += v[i];
+        } else if(v[i] < 0) {
+            cNeg++;
+            somaNeg += v[i];
+        } else {
+            cZero++;
+        }
+    }
+
+    printf("\nPositivos: %d\n", cPos);
+    printf("Negativos: %d\n", cNeg);
+    printf("Zeros: %d\n", cZero);
+
+    printf("Soma dos positivos: %d\n", somaPos);
+
+    if(cNeg > 0) {
+        mediaNeg = (float)somaNeg / cNeg;
+        printf("Media dos negativos: %.2f\n", mediaNeg);
+    } else {
+        printf("Nao ha numeros negativos\n");
+    }
+
+    return 0;
+}
