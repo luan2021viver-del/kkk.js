@@ -1,0 +1,112 @@
+#include <stdio.h>
+#define MAX 10
+
+typedef struct {
+    int dados[MAX];
+    int topo;
+} Pilha;
+void inicializar(Pilha *p) {
+    p->topo = -1;
+}
+int estaVazia(Pilha *p) {
+    return p->topo == -1;
+}
+int estaCheia(Pilha *p) {
+    return p->topo == MAX - 1;
+}
+void push(Pilha *p, int valor) {
+    if (!estaCheia(p)) {
+        p->dados[++p->topo] = valor;
+    }
+}
+int pop(Pilha *p) {
+    if (estaVazia(p))
+        return -1;
+    return p->dados[p->topo--];
+}
+int peek(Pilha *p) {
+    if (estaVazia(p))
+        return -1;
+    return p->dados[p->topo];
+}
+void exibirPilha(Pilha *p, char nome[]) {
+    int i;
+    printf("\n%s:\n", nome);
+    if (estaVazia(p)) {
+        printf("Vazia\n");
+        return;
+    }
+    for (i = p->topo; i >= 0; i--) {
+        printf("%d", p->dados[i]);
+        if (i == p->topo)
+            printf(" <- TOPO");
+        printf("\n");
+    }
+}
+
+int main() {
+    Pilha H;
+    Pilha lixeira;
+    int opcao = 0;
+    int valor;
+
+    inicializar(&H);
+    inicializar(&lixeira);
+
+    while (opcao != 5 ) {
+        printf("\n===== MENU =====\n");
+        printf("1 - Executar nova ação\n");
+        printf("2 - Desfazer\n");
+        printf("3 - Refazer\n");
+        printf("4 - Ver estado das pilhas\n");
+        printf("5 - Sair\n");
+        printf("Opcao: ");
+        scanf("%d", &opcao);
+        
+        
+        
+        switch (opcao) {
+            case 1:
+                printf("Digite um valor: ");
+                scanf("%d", &valor);
+                push(&H, valor);
+                inicializar(&lixeira);
+                
+                break;
+            case 2:
+                if (estaVazia(&H)) {
+                    printf("Nada para desfazer\n");
+                } else {
+                    valor = pop(&H);
+                    push(&lixeira, valor);
+                    printf("Desfeito: %d\n", valor);
+                }
+                break;
+            case 3:
+                if (estaVazia(&lixeira)) {
+                    printf("Nada para refazer\n");
+                } else {
+                    valor = pop(&lixeira);
+                    push(&H, valor);
+                    printf("Item refeito Refeito: %d\n", valor);
+                }
+                break;
+            case 4:
+                exibirPilha(&H, "HISTORICO");
+                exibirPilha(&lixeira, "LIXEIRA");
+                valor = peek(&H);
+                if (valor == -1)
+                    printf("\nHistorico vazio\n");
+                else
+                    printf("\nTopo do historico: %d\n", valor);
+                break;
+            case 0:
+                printf("Encerrando...\n");
+                break;
+            default:
+                printf("Opcao invalida!\n");
+        }
+    }
+
+    return 0;
+}
