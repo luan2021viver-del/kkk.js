@@ -1,0 +1,46 @@
+#include <stdio.h>
+#define MAX 10
+
+typedef struct { 
+    int dados[MAX];
+    int inicio;
+    int fim;
+    int tamanho;
+}Fila;
+void inicializar(Fila *f) {
+    f->inicio = f->fim = f->tamanho = 0;
+}
+int estaVazia(Fila *f) {
+    return f->tamanho == 0;
+}
+int estaCheia(Fila *f) {
+    return f->tamanho == MAX;
+}
+void enqueue(Fila *f, int valor) {
+    if (estaCheia(f)) return;
+    f->dados[f->fim] = valor;
+    f->fim = (f->fim + 1) % MAX; /* circular */
+    f->tamanho++;
+}
+
+int dequeue(Fila *f) {
+    if (estaVazia(f)) return -1;
+    int v = f->dados[f->inicio];
+    f->inicio = (f->inicio + 1) % MAX;
+    f->tamanho--;
+    return v;
+}
+
+int front(Fila *f) {
+    if (estaVazia(f)) return -1;
+    return f->dados[f->inicio];
+}
+int main()
+{
+    Fila f; inicializar(&f);
+    enqueue(&f, 10); enqueue(&f, 20);
+    printf("%d\n", dequeue(&f));
+    
+    return 0;
+    
+}
