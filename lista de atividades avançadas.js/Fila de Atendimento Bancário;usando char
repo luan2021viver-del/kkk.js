@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX     10
+#define MAX_STR 50
+
+typedef struct {
+char dados[MAX][MAX_STR]; /* elementos    */
+int inicio;               /* índice frente */
+int fim;                  /* próx. espaço */
+int tamanho;              /* qtd elementos */
+} Fila;
+
+void inicializar(Fila *f) {
+f->inicio = f->fim = f->tamanho = 0;
+}
+
+int estaVazia(Fila *f) {
+return f->tamanho == 0;
+}
+
+int estaCheia(Fila *f) {
+return f->tamanho == MAX;
+}
+
+void enqueue(Fila *f, const char *str) {
+if (estaCheia(f)) return;
+strncpy(f->dados[f->fim], str, MAX_STR - 1);
+f->dados[f->fim][MAX_STR - 1] = '\0';
+f->fim = (f->fim + 1) % MAX; /* circular */
+f->tamanho++;
+}
+
+void dequeue(Fila *f) {
+if (estaVazia(f)) return;
+printf("Removido: %s\n", f->dados[f->inicio]);
+f->inicio = (f->inicio + 1) % MAX;
+f->tamanho--;
+}
+
+char *front(Fila *f) {
+if (estaVazia(f)) return NULL;
+return f->dados[f->inicio];
+}
+
+int main() {
+Fila f;
+inicializar(&f);
+char input[MAX_STR];
+
+for (int i = 0; i < 3; i++) {
+    printf("Digite uma string: ");
+    scanf("%49s", input);
+    enqueue(&f, input);
+}
+
+printf("\nFrente da fila: %s\n\n", front(&f));
+
+printf("--- Removendo da fila ---\n");
+while (!estaVazia(&f)) {
+    dequeue(&f);
+}
+
+return 0;
+}
