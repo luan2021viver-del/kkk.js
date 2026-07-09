@@ -1,0 +1,21 @@
+#include <stdio.h>
+ int buscarlinear(int arr[], int tam, int alvo){
+        for (int i = 0; i < tam; i++){
+            if (arr[i] == alvo)
+            return i;
+        }
+        return -1;
+    }
+
+
+int main() {
+      int pedidos [] = { 5,3,8,9,2};
+      int alvo = 9, tam = 6;
+     int pos = buscarlinear ( pedidos,tam,alvo);
+if (pos == -1){
+ printf("Elemento não encontrado/n");
+ }else{
+ printf("Elemento encontrado na posição %d.\n", pos);
+}
+	return 0;
+}
