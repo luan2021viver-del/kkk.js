@@ -2,14 +2,12 @@ package com.mycompany.helloworld;
 
 import java.util.Scanner;
 
-
 public class HelloWorld {
 
     public static void main(String[] args) {
-        
+
         Scanner tc = new Scanner(System.in);
-        
-       
+
         int A;
         int B;
         int media;
@@ -18,38 +16,46 @@ public class HelloWorld {
         int sucessor;
         int antecessor;
         int num;
+
         System.out.println("Qual o primeiro numero");
         A = tc.nextInt();
-        
-          System.out.println("Qual o segundo numero");
+
+        System.out.println("Qual o segundo numero");
         B = tc.nextInt();
-        
-        if(A>B){
-           System.out.println("A é o maior numero");
-        } else if (B>A){
-        System.out.println("B é o maior numero");
-        } else {    
-        System.out.println("Os número são iguais");
+
+        if (A > B) {
+            System.out.println("A é o maior numero");
+        } else if (B > A) {
+            System.out.println("B é o maior numero");
+        } else {
+            System.out.println("Os números são iguais");
         }
-        
-        media = A+B; {
-         System.out.println("A media entre eles é "+ media);
+
+        media = A + B;
+        System.out.println("A media entre eles é " + media);
+
+        System.out.println("Qual o seu ano de nascimento?");
+        nascimento = tc.nextInt();
+
+        idade = 2026 - nascimento;
+        System.out.println("A sua idade é " + idade);
+
+        System.out.println("Escolha um numero");
+        num = tc.nextInt();
+
+        antecessor = num - 1;
+        sucessor = num + 1;
+
+        System.out.println(
+            "O antecessor de " + num + " é " + antecessor +
+            " e o sucessor é " + sucessor
+        );
+
+        // Verifica se o número é par ou ímpar
+        if (num % 2 == 0) {
+            System.out.println("O número " + num + " é PAR");
+        } else {
+            System.out.println("O número " + num + " é ÍMPAR");
         }
-        
-         System.out.println("Os número são iguais");
-        
-          System.out.println("Qual o seu ano de nascimento?");
-          nascimento = tc.nextInt();
-         idade = nascimento - 2026;
-          System.out.println("A sua idade é " +idade );
-          
-          System.out.println("Escolha um numnero numero");
-          num = tc.nextInt();
-          antecessor = num -1;
-          sucessor = num +1;
-          System.out.println("O antecessor de" + num + " É " + antecessor + " e o sucessor é" + sucessor);
-          
-           
-               
     }
 }
