@@ -1,8 +1,8 @@
-package com.mycompany.helloworld;
+package com.mycompany.exerciciosjava;
 
 import java.util.Scanner;
 
-public class HelloWorld {
+public class ExerciciosJava {
 
     public static void main(String[] args) {
 
@@ -16,14 +16,12 @@ public class HelloWorld {
         int sucessor;
         double media;
 
-        // Primeiro e segundo número
         System.out.print("Qual o primeiro numero? ");
         A = tc.nextInt();
 
         System.out.print("Qual o segundo numero? ");
         B = tc.nextInt();
 
-        // Verifica qual número é maior
         if (A > B) {
             System.out.println("A é o maior numero.");
         } else if (B > A) {
@@ -32,18 +30,15 @@ public class HelloWorld {
             System.out.println("Os números são iguais.");
         }
 
-        // Calcula a média
         media = (A + B) / 2.0;
         System.out.println("A média entre eles é: " + media);
 
-        // Calcula a idade
         System.out.print("Qual o seu ano de nascimento? ");
         nascimento = tc.nextInt();
 
         idade = 2026 - nascimento;
         System.out.println("A sua idade é: " + idade);
 
-        // Antecessor e sucessor
         System.out.print("Escolha um numero: ");
         num = tc.nextInt();
 
@@ -53,7 +48,6 @@ public class HelloWorld {
         System.out.println("O antecessor de " + num + " é: " + antecessor);
         System.out.println("O sucessor de " + num + " é: " + sucessor);
 
-        // Verifica se é par ou ímpar
         if (num % 2 == 0) {
             System.out.println("O número " + num + " é PAR.");
         } else {
@@ -63,5 +57,4 @@ public class HelloWorld {
         tc.close();
     }
 }
-
 Erro: Não foi possível encontrar ou carregar a classe principal HelloWorld. Causado por: java.lang.NoClassDefFoundError: HelloWorld (nome incorreto: com/mycompany/helloworld/HelloWorld)
