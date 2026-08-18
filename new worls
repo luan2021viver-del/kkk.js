@@ -8,53 +8,56 @@ public class HelloWorld {
 
         Scanner tc = new Scanner(System.in);
 
-        int A;
-        int B;
-        double media;
+        int A, B;
         int nascimento;
         int idade;
-        int sucessor;
-        int antecessor;
         int num;
+        int antecessor;
+        int sucessor;
+        double media;
 
-        System.out.println("Qual o primeiro numero?");
+        // Primeiro e segundo número
+        System.out.print("Qual o primeiro numero? ");
         A = tc.nextInt();
 
-        System.out.println("Qual o segundo numero?");
+        System.out.print("Qual o segundo numero? ");
         B = tc.nextInt();
 
+        // Verifica qual número é maior
         if (A > B) {
-            System.out.println("A é o maior numero");
+            System.out.println("A é o maior numero.");
         } else if (B > A) {
-            System.out.println("B é o maior numero");
+            System.out.println("B é o maior numero.");
         } else {
-            System.out.println("Os números são iguais");
+            System.out.println("Os números são iguais.");
         }
 
+        // Calcula a média
         media = (A + B) / 2.0;
-        System.out.println("A media entre eles é " + media);
+        System.out.println("A média entre eles é: " + media);
 
-        System.out.println("Qual o seu ano de nascimento?");
+        // Calcula a idade
+        System.out.print("Qual o seu ano de nascimento? ");
         nascimento = tc.nextInt();
 
         idade = 2026 - nascimento;
-        System.out.println("A sua idade é " + idade);
+        System.out.println("A sua idade é: " + idade);
 
-        System.out.println("Escolha um numero");
+        // Antecessor e sucessor
+        System.out.print("Escolha um numero: ");
         num = tc.nextInt();
 
         antecessor = num - 1;
         sucessor = num + 1;
 
-        System.out.println(
-            "O antecessor de " + num + " é " + antecessor +
-            " e o sucessor é " + sucessor
-        );
+        System.out.println("O antecessor de " + num + " é: " + antecessor);
+        System.out.println("O sucessor de " + num + " é: " + sucessor);
 
+        // Verifica se é par ou ímpar
         if (num % 2 == 0) {
-            System.out.println("O número " + num + " é PAR");
+            System.out.println("O número " + num + " é PAR.");
         } else {
-            System.out.println("O número " + num + " é ÍMPAR");
+            System.out.println("O número " + num + " é ÍMPAR.");
         }
 
         tc.close();
