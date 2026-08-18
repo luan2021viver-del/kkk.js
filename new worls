@@ -10,17 +10,17 @@ public class HelloWorld {
 
         int A;
         int B;
-        int media;
+        double media;
         int nascimento;
         int idade;
         int sucessor;
         int antecessor;
         int num;
 
-        System.out.println("Qual o primeiro numero");
+        System.out.println("Qual o primeiro numero?");
         A = tc.nextInt();
 
-        System.out.println("Qual o segundo numero");
+        System.out.println("Qual o segundo numero?");
         B = tc.nextInt();
 
         if (A > B) {
@@ -31,7 +31,7 @@ public class HelloWorld {
             System.out.println("Os números são iguais");
         }
 
-        media = A + B;
+        media = (A + B) / 2.0;
         System.out.println("A media entre eles é " + media);
 
         System.out.println("Qual o seu ano de nascimento?");
@@ -51,11 +51,12 @@ public class HelloWorld {
             " e o sucessor é " + sucessor
         );
 
-        // Verifica se o número é par ou ímpar
         if (num % 2 == 0) {
             System.out.println("O número " + num + " é PAR");
         } else {
             System.out.println("O número " + num + " é ÍMPAR");
         }
+
+        tc.close();
     }
 }
