@@ -1,8 +1,6 @@
-package com.mycompany.exerciciosjava;
-
 import java.util.Scanner;
 
-public class ExerciciosJava {
+public class Exerciciosjava  {
 
     public static void main(String[] args) {
 
@@ -53,8 +51,6 @@ public class ExerciciosJava {
         } else {
             System.out.println("O número " + num + " é ÍMPAR.");
         }
-
-        tc.close();
+    
     }
 }
-Erro: Não foi possível encontrar ou carregar a classe principal HelloWorld. Causado por: java.lang.NoClassDefFoundError: HelloWorld (nome incorreto: com/mycompany/helloworld/HelloWorld)
