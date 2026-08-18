@@ -63,3 +63,5 @@ public class HelloWorld {
         tc.close();
     }
 }
+
+Erro: Não foi possível encontrar ou carregar a classe principal HelloWorld. Causado por: java.lang.NoClassDefFoundError: HelloWorld (nome incorreto: com/mycompany/helloworld/HelloWorld)
