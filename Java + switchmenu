@@ -1,0 +1,47 @@
+import java.util.Scanner;
+
+public class Main  {
+
+    public static void main(String[] args) {
+
+        Scanner tc = new Scanner(System.in);
+        
+        menu();
+    }
+        
+        
+        
+        Atividade
+        int op;
+        
+        do{
+           System.out.println("Escolha a questão de 1 a 5 ou 0: SAIR");
+           op = tc.nextInt();
+           switch (op) {
+               
+            case 1:{
+                questao01 ();
+                   
+            } case 2:{
+                
+            } case 3 :{
+                
+            } case 4 :{
+                
+            } case 5 :{
+                
+           }  case 0 : {
+               
+           } default:
+                System.out.println("Saindo do Sistema");
+          } while (op != 0);
+          
+          
+        }
+         
+        
+        }
+    private void questao01{
+    }
+    
+}
