@@ -56,69 +56,73 @@ public class Main {
     public static void questao01() {
 
         int A, B;
-        int nascimento;
-        int idade;
-        int num;
 
-        System.out.println("\n===== QUESTÃO 01 =====");
-
-        System.out.print("Qual o primeiro numero? ");
+        System.out.print("Digite o primeiro numero: ");
         A = tc.nextInt();
 
-        System.out.print("Qual o segundo numero? ");
+        System.out.print("Digite o segundo numero: ");
         B = tc.nextInt();
 
         if (A > B) {
-            System.out.println("A é maior.");
+            System.out.println("Maior - " + A + " / Menor - " + B);
         } else if (B > A) {
-            System.out.println("B é maior.");
+            System.out.println("Maior - " + B + " / Menor - " + A);
         } else {
-            System.out.println("São iguais.");
-        }
-
-        System.out.println("Média: " + ((A + B) / 2.0));
-
-        System.out.print("Ano de nascimento: ");
-        nascimento = tc.nextInt();
-
-        idade = 2026 - nascimento;
-
-        System.out.println("Idade: " + idade);
-
-        System.out.print("Escolha um numero: ");
-        num = tc.nextInt();
-
-        System.out.println("Antecessor: " + (num - 1));
-        System.out.println("Sucessor: " + (num + 1));
-
-        if (num % 2 == 0) {
-            System.out.println("É PAR.");
-        } else {
-            System.out.println("É ÍMPAR.");
+            System.out.println("Os números são iguais!");
         }
     }
 
     public static void questao02() {
 
-        System.out.println("\n===== QUESTÃO 02 =====");
+        int A, B;
+        double media;
 
+        System.out.print("Digite o primeiro numero: ");
+        A = tc.nextInt();
+
+        System.out.print("Digite o segundo numero: ");
+        B = tc.nextInt();
+
+        media = (A + B) / 2.0;
+
+        System.out.println("Média: " + media);
     }
 
     public static void questao03() {
 
-        System.out.println("\n===== QUESTÃO 03 =====");
+        int num;
 
+        System.out.print("Digite um numero: ");
+        num = tc.nextInt();
+
+        if (num % 2 == 0) {
+            System.out.println("O número é PAR.");
+        } else {
+            System.out.println("O número é ÍMPAR.");
+        }
     }
 
     public static void questao04() {
 
-        System.out.println("\n===== QUESTÃO 04 =====");
+        int nascimento;
+        int idade;
 
+        System.out.print("Digite o ano de nascimento: ");
+        nascimento = tc.nextInt();
+
+        idade = 2026 - nascimento;
+
+        System.out.println("Idade atual: " + idade);
     }
 
     public static void questao05() {
 
-        System.out.println("\n===== QUESTÃO 05 =====");
+        int num;
 
+        System.out.print("Digite um numero: ");
+        num = tc.nextInt();
+
+        System.out.println("Antecessor: " + (num - 1));
+        System.out.println("Sucessor: " + (num + 1));
     }
 }
