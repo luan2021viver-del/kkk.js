@@ -1,47 +1,98 @@
 import java.util.Scanner;
 
-public class Main  {
+public class Main {
+
+    static Scanner tc = new Scanner(System.in);
 
     public static void main(String[] args) {
 
-        Scanner tc = new Scanner(System.in);
-        
-        menu();
-    }
-        
-        
-        
-        Atividade
         int op;
-        
-        do{
-           System.out.println("Escolha a questão de 1 a 5 ou 0: SAIR");
-           op = tc.nextInt();
-           switch (op) {
-               
-            case 1:{
-                questao01 ();
-                   
-            } case 2:{
-                
-            } case 3 :{
-                
-            } case 4 :{
-                
-            } case 5 :{
-                
-           }  case 0 : {
-               
-           } default:
-                System.out.println("Saindo do Sistema");
-          } while (op != 0);
-          
-          
-        }
-         
-        
-        }
-    private void questao01{
+
+        do {
+            System.out.println("\n===== MENU =====");
+            System.out.println("1 - Questão 01");
+            System.out.println("2 - Questão 02");
+            System.out.println("3 - Questão 03");
+            System.out.println("4 - Questão 04");
+            System.out.println("5 - Questão 05");
+            System.out.println("0 - SAIR");
+            System.out.print("Escolha: ");
+
+            op = tc.nextInt();
+
+            switch (op) {
+
+                case 1:
+                    questao01();
+                    break;
+
+                case 2:
+                    System.out.println("Questão 02");
+                    break;
+
+                case 3:
+                    System.out.println("Questão 03");
+                    break;
+
+                case 4:
+                    System.out.println("Questão 04");
+                    break;
+
+                case 5:
+                    System.out.println("Questão 05");
+                    break;
+
+                case 0:
+                    System.out.println("Saindo...");
+                    break;
+
+                default:
+                    System.out.println("Opção inválida!");
+            }
+
+        } while (op != 0);
     }
-    
+
+    public static void questao01() {
+
+        int A, B;
+        int nascimento;
+        int idade;
+        int num;
+
+        System.out.print("Qual o primeiro numero? ");
+        A = tc.nextInt();
+
+        System.out.print("Qual o segundo numero? ");
+        B = tc.nextInt();
+
+        if (A > B) {
+            System.out.println("A é maior.");
+        } else if (B > A) {
+            System.out.println("B é maior.");
+        } else {
+            System.out.println("São iguais.");
+        }
+
+        System.out.println("Média: " + ((A + B) / 2.0));
+
+        System.out.print("Ano de nascimento: ");
+        nascimento = tc.nextInt();
+
+        idade = 2026 - nascimento;
+
+        System.out.println("Idade: " + idade);
+
+        System.out.print("Escolha um numero: ");
+        num = tc.nextInt();
+
+        System.out.println("Antecessor: " + (num - 1));
+        System.out.println("Sucessor: " + (num + 1));
+
+        if (num % 2 == 0) {
+            System.out.println("É PAR.");
+        } else {
+            System.out.println("É ÍMPAR.");
+        }
+    }
 }
