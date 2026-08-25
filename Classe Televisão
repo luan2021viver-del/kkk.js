@@ -1,0 +1,60 @@
+public class Televisao
+{
+	boolean ligada;
+	int volume;
+	int canal;
+	
+	public Televisao(){
+	    ligada = false;
+	    volume = 0;
+	    canal = 0;
+	}
+	
+	void status(){
+	    System.out.println("A TV esta"+this.ligada?"");
+	}
+	void ligar(){
+	    this.ligada = !this.ligada;
+	}
+    void aumentarVolume(){
+        if(this.volume == 100) {
+         System.out.System.out.println("volume Maximo!");
+        } else {
+        this.volume++;
+    }
+    }
+    void aumentarVolume(){
+        {
+        if(this.volume == 0) {
+         System.out.System.out.println("Mudo!");
+        } else {
+        this.volume--;
+    }
+    }
+    }
+    void diminuirCanal(){
+        if(this.canal == 0) {
+         System.out.System.out.println("Canal 0");
+        } else {
+        this.canal--;
+    }
+    }
+     void aumentarCanal(){
+        if(this.canal == 0) {
+         System.out.System.out.println("Mudar canal");
+        } else {
+        this.canal++;
+
+public class Main {
+    public static void main(String[] args) {
+      Televisao samsung = new Televisao ();
+      samsung.status();
+      samsung.ligar
+      samsung.aumentarCanal
+      samsung.aumentarVolume
+      samsung
+    }
+}
+    }
+    }
+}
