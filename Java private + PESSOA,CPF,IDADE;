@@ -1,0 +1,34 @@
+public class Pessoa {
+   
+   private String nome;
+   private String cpf;
+   private int idade;
+
+   public Pessoa(){
+
+   }
+
+    
+    public String getNome(){
+      return this.nome;
+    }
+    public void setNome( String nome) {
+      this.nome
+    }
+    public String getCpf(){,
+      return.this.cpf;
+    }
+    public void setCpf(String cpf){
+      if this.cpf = cpf;
+    }
+    private boolean validarCpf(string cpf){
+      if(cpf.length() == 14) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    public String exibir(){
+       return "Nome" + this.nome +"\this"
+    }
+}
