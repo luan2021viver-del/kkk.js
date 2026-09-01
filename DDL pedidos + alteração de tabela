@@ -1,1 +1,36 @@
+DROP DATABASE IF EXISTS  CLIENTES;
+
+CREATE DATABASE CLIENTES;
+
+USE CLIENTES;
+
+CREATE TABLE INFOCLIENTES (
+  id_clientes INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  nome VARCHAR(100),
+  email VARCHAR (100),
+  cpf int 
+  
+);
+
+CREATE TABLE pedidos (
+  id_pedidos INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  id_clientes INT,
+  data_pedido DATE,
+  valor_total decimal,
+  FOREIGN KEY(id_clientes) REFERENCES clientes(INFOCLIENTES)
+  
+);
+
+INSERT INTO INFOCLIENTES (nome,email,cpf) values ("Leo","LEO@GMAIL.COM","203.432.453-21");
+INSERT INTO INFOCLIENTES (nome,email,cpf) values ("Sofia","SOFIA@GMAIL.COM","111.234.235-56");
+INSERT INTO INFOCLIENTES (nome,email,cpf) values ("Carlos","CARLOS@GMAIL.COM","789.566.433-32");
+
+INSERT INTO pedidos (data_pedido,valor_total) values ("12/09/26","10,20");
+INSERT INTO pedidos (data_pedido,valor_total) values ("12/09/26","70,7");
+INSERT INTO pedidos (data_pedido,valor_total) values ("12/09/26","30,4");
+
+
+SHOW TABLES;
+DESCRIBE INFOCLIENTES;
+DESCRIBE pedidos;
 
