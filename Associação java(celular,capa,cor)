@@ -1,0 +1,52 @@
+public class Main {
+
+  static class Capa {
+  String cor;
+  String material;
+  double preco;
+
+   Capa(String cor, String material, double preco) {
+    this.cor = cor;
+    this.material = material;
+    this.preco = preco;
+    }
+    }
+
+    static class Celular {
+    String marca;
+    String cor;
+   String modelo;
+    double valor;
+    Capa capa;
+
+   Celular(String marca, String cor, String modelo, double valor, Capa capa) {
+     this.marca = marca;
+     this.cor = cor;
+     this.modelo = modelo;
+     this.valor = valor;
+     this.capa = capa;
+     }
+
+      double calcularValorTotal() {
+     return valor + capa.preco;
+     }
+    }
+
+    public static void main(String[] args) {
+
+     Capa capa = new Capa("Verde", "Plástico", 50);
+
+    Celular celular = new Celular(
+    "Motorola",
+    "Preto",
+    "Moto G",
+   1200,
+   capa
+   );
+
+   System.out.println("O valor total do celular " + celular.marca
+    + " com a capa " + celular.cor
+    + " de " + celular.capa.material
+    + " ficou de: R$ " + celular.calcularValorTotal());
+    }
+}
