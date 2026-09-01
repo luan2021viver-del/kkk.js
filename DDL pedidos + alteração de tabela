@@ -1,4 +1,4 @@
-DROP DATABASE if not exists CLIENTES;
+DROP DATABASE IF EXISTS CLIENTES;
 
 CREATE DATABASE CLIENTES;
 
@@ -19,18 +19,56 @@ CREATE TABLE pedidos (
     FOREIGN KEY (id_clientes) REFERENCES INFOCLIENTES(id_clientes)
 );
 
-INSERT INTO INFOCLIENTES (nome, email, cpf)  VALUES ("Leo", "LEO@GMAIL.COM", "203.432.453-21");
-INSERT INTO INFOCLIENTES (nome, email, cpf) 
-VALUES ("Sofia", "SOFIA@GMAIL.COM", "111.234.235-56");
 INSERT INTO INFOCLIENTES (nome, email, cpf)
- VALUES ("Carlos", "CARLOS@GMAIL.COM", "789.566.433-32");
-INSERT INTO pedidos (id_clientes, data_pedido, valor_total) 
+VALUES
+("Leo", "LEO@GMAIL.COM", "203.432.453-21"),
+("Sofia", "SOFIA@GMAIL.COM", "111.234.235-56"),
+("Carlos", "CARLOS@GMAIL.COM", "789.566.433-32");
+
+INSERT INTO pedidos (id_clientes, data_pedido, valor_total)
 VALUES (1, "2026-09-12", 10.20);
-INSERT INTO pedidos (id_clientes, data_pedido, valor_total) 
+
+
+ALTER TABLE INFOCLIENTES
+ADD telefone VARCHAR(20);
+
+
+INSERT INTO INFOCLIENTES (nome, email, cpf, telefone)
+VALUES
+("Ana", "ANA@GMAIL.COM", "123.456.789-10", "71999999999"),
+("Pedro", "PEDRO@HOTMAIL.COM", "987.654.321-00", "71988888888"),
+("Maria", "MARIA@GMAIL.COM", "456.789.123-11", NULL);
+
+
+INSERT INTO pedidos (id_clientes, data_pedido, valor_total)
 VALUES (2, "2026-09-12", 70.70);
-INSERT INTO pedidos (id_clientes, data_pedido, valor_total) 
-VALUES (3, "2026-09-12", 30.40);
+
+
+UPDATE INFOCLIENTES
+SET nome = "Carlos Silva",
+    email = "CARLOSSILVA@GMAIL.COM"
+WHERE id_clientes = 3;
+
+
+UPDATE INFOCLIENTES
+SET nome = UPPER(nome)
+WHERE email LIKE "%@GMAIL.COM";
+
+
+DELETE FROM INFOCLIENTES
+WHERE telefone IS NULL;
+
+
+DELETE FROM pedidos
+WHERE id_clientes = 1;
+
+
+-- DELETE FROM pedidos;
+-- DELETE FROM INFOCLIENTES;
+
 
 SHOW TABLES;
+
 DESCRIBE INFOCLIENTES;
-DESCRIBE pedidos;
+
+DESCRIBE pedidos;"
