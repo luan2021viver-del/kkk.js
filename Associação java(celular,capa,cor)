@@ -4,23 +4,10 @@ public class Main {
         private String cor;
         private String material;
         private double preco;
-
         Capa(String cor, String material, double preco) {
             this.cor = cor;
             this.material = material;
             this.preco = preco;
-        }
-
-        public String getCor() {
-            return cor;
-        }
-
-        public String getMaterial() {
-            return material;
-        }
-
-        public double getPreco() {
-            return preco;
         }
     }
 
@@ -30,44 +17,21 @@ public class Main {
         private String modelo;
         private double valor;
         private Capa capa;
-
         Celular(String marca, String cor, String modelo, double valor, Capa capa) {
             this.marca = marca;
             this.cor = cor;
             this.modelo = modelo;
-            this.valor = valor;
+        this.valor = valor;
             this.capa = capa;
         }
-
-        public String getMarca() {
-            return marca;
-        }
-
-        public String getCor() {
-            return cor;
-        }
-
-        public String getModelo() {
-            return modelo;
-        }
-
-        public double getValor() {
-            return valor;
-        }
-
-        public Capa getCapa() {
-            return capa;
-        }
-
         double calcularValorTotal() {
-            return valor + (capa != null ? capa.getPreco() : 0);
+            return valor + capa.preco;
         }
     }
 
     public static void main(String[] args) {
 
         Capa capa = new Capa("Verde", "Plástico", 50);
-
         Celular celular = new Celular(
             "Motorola",
             "Preto",
@@ -75,10 +39,9 @@ public class Main {
             1200,
             capa
         );
-
-        System.out.println("O valor total do celular " + celular.getMarca()
-            + " com a capa " + celular.getCor()
-            + " de " + celular.getCapa().getMaterial()
+        System.out.println("O valor total do celular " + celular.marca
+            + " com a capa " + celular.cor
+            + " de " + celular.capa.material
             + " ficou de: R$ " + celular.calcularValorTotal());
     }
 }
