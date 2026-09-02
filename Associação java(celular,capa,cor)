@@ -10,6 +10,18 @@ public class Main {
             this.material = material;
             this.preco = preco;
         }
+
+        public String getCor() {
+            return cor;
+        }
+
+        public String getMaterial() {
+            return material;
+        }
+
+        public double getPreco() {
+            return preco;
+        }
     }
 
     static class Celular {
@@ -27,8 +39,28 @@ public class Main {
             this.capa = capa;
         }
 
+        public String getMarca() {
+            return marca;
+        }
+
+        public String getCor() {
+            return cor;
+        }
+
+        public String getModelo() {
+            return modelo;
+        }
+
+        public double getValor() {
+            return valor;
+        }
+
+        public Capa getCapa() {
+            return capa;
+        }
+
         double calcularValorTotal() {
-            return valor + capa.preco;
+            return valor + (capa != null ? capa.getPreco() : 0);
         }
     }
 
@@ -44,9 +76,9 @@ public class Main {
             capa
         );
 
-        System.out.println("O valor total do celular " + celular.marca
-            + " com a capa " + celular.cor
-            + " de " + celular.capa.material
+        System.out.println("O valor total do celular " + celular.getMarca()
+            + " com a capa " + celular.getCor()
+            + " de " + celular.getCapa().getMaterial()
             + " ficou de: R$ " + celular.calcularValorTotal());
     }
 }
