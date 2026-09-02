@@ -1,47 +1,52 @@
 public class Main {
 
-    static class Capa {
-        private String cor;
-        private String material;
+    static class Monitor {
+        private int tamanho;
+        private String tipoTela;
         private double preco;
-        Capa(String cor, String material, double preco) {
-            this.cor = cor;
-            this.material = material;
+
+        Monitor(int tamanho, String tipoTela, double preco) {
+            this.tamanho = tamanho;
+            this.tipoTela = tipoTela;
             this.preco = preco;
         }
     }
 
-    static class Celular {
+    static class Computador {
         private String marca;
         private String cor;
         private String modelo;
         private double valor;
-        private Capa capa;
-        Celular(String marca, String cor, String modelo, double valor, Capa capa) {
+        private Monitor monitor;
+
+        Computador(String marca, String cor, String modelo, double valor, Monitor monitor) {
             this.marca = marca;
             this.cor = cor;
             this.modelo = modelo;
-        this.valor = valor;
-            this.capa = capa;
+            this.valor = valor;
+            this.monitor = monitor;
         }
+
         double calcularValorTotal() {
-            return valor + capa.preco;
+            return valor + monitor.preco;
         }
     }
 
     public static void main(String[] args) {
 
-        Capa capa = new Capa("Verde", "Plástico", 50);
-        Celular celular = new Celular(
-            "Motorola",
+        Monitor monitor = new Monitor(24, "LED", 500);
+
+        Computador computador = new Computador(
+            "Dell",
             "Preto",
-            "Moto G",
-            1200,
-            capa
+            "Inspiron",
+            3000,
+            monitor
         );
-        System.out.println("O valor total do celular " + celular.marca
-            + " com a capa " + celular.cor
-            + " de " + celular.capa.material
-            + " ficou de: R$ " + celular.calcularValorTotal());
+
+        System.out.println("O valor total do computador " + computador.marca
+            + " com o monitor de " + computador.monitor.tamanho
+            + " polegadas " + computador.monitor.tipoTela
+            + " ficou de: R$" + computador.calcularValorTotal());
     }
 }
