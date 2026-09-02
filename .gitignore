@@ -1,1 +1,73 @@
-https://escolasesiba-my.sharepoint.com/:x:/g/personal/office_camacari_03_1_senaibahia_com_br/IQAc9mp3oU1gTZecKk2mBWJyATA2EDOR4Os2iaoAP9Gobe4?e=7f4FNE
+DROP DATABASE IF EXISTS CLIENTES;
+
+CREATE DATABASE CLIENTES;
+
+USE CLIENTES;
+
+-- Desativa restrição para permitir UPDATE/DELETE sem Chave Primária direta
+SET SQL_SAFE_UPDATES = 0;
+
+CREATE TABLE INFOCLIENTES (
+    id_clientes INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    nome VARCHAR(100),
+    email VARCHAR(100),
+    cpf VARCHAR(14)
+);
+
+CREATE TABLE pedidos (
+    id_pedidos INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    id_clientes INT,
+    data_pedido DATE,
+    valor_total DECIMAL(10,2),
+    FOREIGN KEY (id_clientes) REFERENCES INFOCLIENTES(id_clientes)
+);
+
+ALTER TABLE INFOCLIENTES
+ADD telefone VARCHAR(20);
+
+INSERT INTO INFOCLIENTES (nome, email, cpf, telefone)
+VALUES ('Leo', 'LEO@GMAIL.COM', '203.432.453-21', '71 93423-2312');
+
+INSERT INTO INFOCLIENTES (nome, email, cpf, telefone)
+VALUES ('Sofia', 'SOFIA@GMAIL.COM', '111.234.235-56', '71 92133-4555');
+
+INSERT INTO INFOCLIENTES (nome, email, cpf, telefone)
+VALUES ('Carlos', 'CARLOS@GMAIL.COM', '789.566.433-32', '71 95639-3455');
+
+INSERT INTO pedidos (id_clientes, data_pedido, valor_total)
+VALUES (1, '2026-09-12', 10.20);
+
+INSERT INTO pedidos (id_clientes, data_pedido, valor_total)
+VALUES (2, '2026-09-12', 70.70);
+
+INSERT INTO pedidos (id_clientes, data_pedido, valor_total)
+VALUES (3, '2026-09-12', 30.40);
+
+UPDATE INFOCLIENTES
+SET nome = 'Carlos SILVA',
+    email = 'CARLOSSILVA@GMAIL.COM'
+WHERE id_clientes = 3;
+
+UPDATE INFOCLIENTES
+SET nome = UPPER(nome)
+WHERE email LIKE '%@GMAIL.COM';
+
+DELETE FROM INFOCLIENTES
+WHERE telefone IS NULL;
+
+DELETE FROM pedidos
+WHERE id_clientes = 1;
+
+-- Reativa a trava de segurança ao final por boa prática
+SET SQL_SAFE_UPDATES = 1;
+
+SHOW TABLES;
+
+SELECT * FROM INFOCLIENTES;
+
+SELECT * FROM pedidos;
+
+DESCRIBE INFOCLIENTES;
+
+DESCRIBE pedidos;
+4Os2iaoAP9Gobe4?e=7f4FNE
