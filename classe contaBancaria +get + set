@@ -1,0 +1,38 @@
+package com.mycompany.contaBancaria;
+
+public class contaBancaria {
+
+    private String titular;
+    private double saldo;
+
+    public contaBancaria(String titular, double saldo) {
+        this.titular = titular;
+        setSaldo(saldo);
+    }
+
+    public String getTitular() {
+        return this.titular;
+    }
+
+    public void setTitular(String titular) {
+        this.titular = titular;
+    }
+
+    public double getSaldo() {
+        return this.saldo;
+    }
+
+    public void setSaldo(double saldo) {
+        if (saldo < 0) {
+            System.out.println("Valor inválido!");
+            this.saldo = 0;
+        } else {
+            this.saldo = saldo;
+        }
+    }
+
+    public void exibirDados() {
+        System.out.println("Nome titular: " + getTitular()
+                + "\nSaldo: " + getSaldo());
+    }
+}
