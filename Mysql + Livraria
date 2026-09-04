@@ -1,0 +1,59 @@
+DROP DATABASE IF EXISTS db_livraria;
+
+CREATE DATABASE db_livraria;
+
+USE db_livraria;
+
+CREATE TABLE autor (
+    id_autor INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    nacionalidade VARCHAR(50),
+    data_nascimento DATE
+);
+
+CREATE TABLE editora (
+    id_editora INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    endereco VARCHAR(200),
+    telefone VARCHAR(30),
+    email VARCHAR(100)
+);
+
+CREATE TABLE livro (
+    id_livro INT PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(200) NOT NULL,
+    ano_publicacao INT,
+    id_editora INT,
+    id_autor_principal INT,
+    FOREIGN KEY (id_editora) REFERENCES editora(id_editora),
+    FOREIGN KEY (id_autor_principal) REFERENCES autor(id_autor)
+);
+
+INSERT INTO autor (nome, nacionalidade, data_nascimento) VALUES
+('Machado de Assis', 'Brasil', '1839-06-21'),
+('Jorge Amado', 'Brasil', '1912-08-10'),
+('José de Alencar', 'Brasil', '1829-05-01');
+
+INSERT INTO editora (nome, endereco, telefone, email) VALUES
+('Editora Brasil', 'Rua A, 100', '71999999999', 'contato@brasil.com'),
+('Editora Nacional', 'Rua B, 200', '71988888888', 'contato@nacional.com');
+
+INSERT INTO livro (titulo, ano_publicacao, id_editora, id_autor_principal) VALUES
+('Dom Casmurro', 1899, 1, 1),
+('Capitães da Areia', 1937, 2, 2);
+
+UPDATE autor
+SET nacionalidade = 'Brasil'
+WHERE id_autor = 1;
+
+UPDATE editora
+SET telefone = '71977777777'
+WHERE id_editora = 1;
+
+DELETE FROM livro
+WHERE id_editora = 2;
+
+SELECT * FROM autor;
+
+SELECT titulo, ano_publicacao
+FROM livro;
