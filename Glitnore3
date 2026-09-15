@@ -1,0 +1,42 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        
+        Scanner teclado = new Scanner(System.in);
+        int[] numeros = new int[10];
+        int soma = 0;
+        System.out.println("EXERCÍCIO 1");
+        for (int i = 0; i < 10; i++) {
+            System.out.print("Digite o " + (i + 1) + "º número: ");
+            numeros[i] = teclado.nextInt();
+            soma = soma + numeros[i];
+        }
+        System.out.println("\nNúmeros digitados:");
+        for (int i = 0; i < 10; i++) {
+            System.out.println(numeros[i]);
+        }
+        System.out.println("Soma total: " + soma);
+        teclado.nextLine();
+        String[] nomes = new String[10];
+        System.out.println("\nEXERCÍCIO 2");
+        for (int i = 0; i < 10; i++) {
+            System.out.print("Digite o " + (i + 1) + "º nome: ");
+            nomes[i] = teclado.nextLine();
+        }
+        System.out.print("\nDigite um nome para pesquisar: ");
+        String nomePesquisa = teclado.nextLine();
+        boolean encontrado = false;
+        for (int i = 0; i < 10; i++) {
+            if (nomes[i].equalsIgnoreCase(nomePesquisa)) {
+                System.out.println("Nome encontrado na posição: " + i);
+                encontrado = true;
+            }
+        }
+        if (encontrado == false) {
+            System.out.println("Nome não encontrado.");
+        }
+        teclado.close();
+    }
+}
