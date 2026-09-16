@@ -1,0 +1,44 @@
+DROP DATABASE IF EXISTS lojaB;
+
+CREATE DATABASE lojaB;
+
+USE lojaB;
+
+CREATE TABLE brinquedos (
+    idB INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    categoria varchar(50),
+    preço decimal(10,2),
+    estoque int
+);
+
+
+INSERT INTO brinquedos(idB, nome,categoria,preço,estoque) VALUES (1, 'Carrinho de controle  remoto',"veiculo","150,00","10");
+INSERT INTO brinquedos(idB, nome,categoria,preço,estoque) VALUES (2, 'boneca articulada',"bonecos","80,00","15");
+INSERT INTO brinquedos(idB, nome,categoria,preço,estoque) VALUES (3, 'quebra-cabeça 1000 peças',"jogos","45,00","20");
+INSERT INTO brinquedos(idB, nome,categoria,preço,estoque) VALUES (4, 'jogo de tabuleiro de estrategia',"jogos","120,00","8");
+INSERT INTO brinquedos(idB, nome,categoria,preço,estoque) VALUES (5, 'Urso de Pelucia gigantes',"pelucias","200,00","5");
+
+Select COUNT(*)  AS QUANTIDADE_TOTAL
+from brinquedos;
+
+Select SUM(preço) AS valor_total
+from brinquedos;
+
+Select AVG (preço) AS preco_medio
+from brinquedos;
+
+Select MAX(preço) AS brinquedo_mais_caro
+from brinquedos;
+
+Select MIN(preço) AS brinquedo_mais_barato
+from brinquedos;
+
+Select COUNT(*)  AS quantidade_jogos
+from brinquedos
+where categoria = 'jogos';
+
+
+SELECT * FROM brinquedos;
+
+
