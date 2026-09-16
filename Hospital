@@ -1,0 +1,112 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+abstract class Medico {
+    private String crm;
+    private String nome;
+    private int idade;
+    private double salario;
+
+    public Medico(String crm, String nome, int idade, double salario) {
+        this.crm = crm;
+        this.nome = nome;
+        this.idade = idade;
+        this.salario = salario;
+    }
+
+    public String getCrm() {
+        return crm;
+    }
+
+    public void setCrm(String crm) {
+        this.crm = crm;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+
+    public double getSalario() {
+        return salario;
+    }
+
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
+
+    public abstract boolean medicoAposentado();
+
+    public abstract double valorAposentadoria();
+
+    public void mostrarDados() {
+        System.out.println("CRM: " + crm);
+        System.out.println("Nome: " + nome);
+        System.out.println("Idade: " + idade);
+        System.out.println("Salário: R$ " + salario);
+        System.out.println("Aposentado: " + (medicoAposentado() ? "Sim" : "Não"));
+        System.out.println("Valor da aposentadoria: R$ " + valorAposentadoria());
+    }
+}
+
+class MedicoCirurgiao extends Medico {
+
+    public MedicoCirurgiao(String crm, String nome, int idade, double salario) {
+        super(crm, nome, idade, salario);
+    }
+
+    @Override
+    public boolean medicoAposentado() {
+        return getIdade() > 50;
+    }
+
+    @Override
+    public double valorAposentadoria() {
+        double aposentadoria = getSalario() * 0.80;
+
+        if (aposentadoria > 800) {
+            aposentadoria -= 800;
+        }
+
+        return aposentadoria;
+    }
+}
+
+class MedicoAuxiliar extends Medico {
+
+    public MedicoAuxiliar(String crm, String nome, int idade, double salario) {
+        super(crm, nome, idade, salario);
+    }
+
+    @Override
+    public boolean medicoAposentado() {
+        return getIdade() > 60;
+    }
+
+    @Override
+    public double valorAposentadoria() {
+        return getSalario() * 0.80;
+    }
+}
+
+class Hospital {
+    private ArrayList<Medico> medicos;
+
+    public Hospital() {
+        medicos = new ArrayList<>();
+    }
+
+    public void adicionarMedico(Medico medico) {
+        medicos.add(medico);
+        System.out.println("Médico cadastrado com sucesso!");
