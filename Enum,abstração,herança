@@ -1,0 +1,14 @@
+public enum TipoVeiculoEnum {
+    
+    CARRO, MOTO;
+
+}
+
+abstract class veiculo {
+    
+    private string placa;
+    private int HDE;
+     
+     public carro
+  
+}
