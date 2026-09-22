@@ -1,0 +1,36 @@
+DROP DATABASE IF EXISTS Cadastro;
+
+CREATE DATABASE cadastro;
+
+USE cadastro;
+
+CREATE TABLE Estado (
+    idE INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    região VARCHAR(50)
+ 
+);
+
+CREATE TABLE cidade (
+    idC INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    idE INT,
+      FOREIGN KEY (idE) REFERENCES Estado(idE)
+);
+
+
+INSERT INTO estado (idE, nome, região) VALUES
+('1', 'Bahia', 'Nordeste');
+
+INSERT INTO cidade (idc, nome, idE) VALUES
+('1', 'Camaçari',1 );
+
+
+
+SELECT * FROM estado;
+select * from cidade;
+
+
+SELECT * FROM estado E
+INNER JOIN cidade C
+on E.ID = C.IDE;
