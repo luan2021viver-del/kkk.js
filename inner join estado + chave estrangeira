@@ -88,14 +88,32 @@ SELECT * FROM endereço;
 SELECT * FROM Cliente;
 
 
+SELECT Cliente.nome, Estado.nome
+FROM Cliente
+INNER JOIN endereço ON Cliente.idEN = endereço.idEN
+INNER JOIN Estado ON endereço.idE = Estado.idE;
+
+SELECT cidade.nome, Estado.nome
+FROM cidade
+INNER JOIN Estado ON cidade.idE = Estado.idE;
+
+SELECT Estado.nome, Pais.nome
+FROM Estado
+INNER JOIN Pais ON Estado.idP = Pais.idP;
+
+SELECT Cliente.nome, Pais.nome
+FROM Cliente
+INNER JOIN endereço ON Cliente.idEN = endereço.idEN
+INNER JOIN Estado ON endereço.idE = Estado.idE
+INNER JOIN Pais ON Estado.idP = Pais.idP;
 
 
-Select Cliente.nome
-from cliente
-inner join Estado ON Cliente.idCL = Estado.idE
-limit 3;
-
-
+SELECT Cliente.nome, cidade.nome, Estado.nome, Pais.nome
+FROM Cliente
+INNER JOIN endereço ON Cliente.idEN = endereço.idEN
+INNER JOIN cidade ON endereço.idC = cidade.idC
+INNER JOIN Estado ON endereço.idE = Estado.idE
+INNER JOIN Pais ON Estado.idP = Pais.idP;
 
 
 SELECT *FROM Estado E
