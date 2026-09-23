@@ -1,36 +1,103 @@
 DROP DATABASE IF EXISTS Cadastro;
 
-CREATE DATABASE cadastro;
+CREATE DATABASE Cadastro;
 
-USE cadastro;
+USE Cadastro;
+
+
+Create Table Pais ( 
+idP INT PRIMARY KEY AUTO_INCREMENT,
+nome Varchar (50),
+Continente Varchar(50)
+
+);
+
 
 CREATE TABLE Estado (
     idE INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
-    região VARCHAR(50)
- 
+    região VARCHAR(50),
+    sigla varchar(50),
+    idP Int,
+    FOREIGN KEY (idP) REFERENCES Pais(idP)
 );
 
 CREATE TABLE cidade (
     idC INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
     idE INT,
-      FOREIGN KEY (idE) REFERENCES Estado(idE)
+    FOREIGN KEY (idE) REFERENCES Estado(idE)
 );
 
+CREATE TABLE endereço (
+    idEN INT PRIMARY KEY AUTO_INCREMENT,
+    bairro VARCHAR(200),
+    rua VARCHAR(200),
+    numero INT,
+    idE INT,
+    idC INT,
+    FOREIGN KEY (idC) REFERENCES cidade(idC),
+    FOREIGN KEY (idE) REFERENCES Estado(idE)
+);
 
-INSERT INTO estado (idE, nome, região) VALUES
-('1', 'Bahia', 'Nordeste');
+CREATE TABLE Cliente(
+idCL INT PRIMARY KEY AUTO_INCREMENT,
+nome varchar(50),
+cpf int,
+data_nasc DATE,
+sexo varchar (50),
+email varchar (50),
+idEN INT,
+ FOREIGN KEY (idEN) REFERENCES endereço (idEN)
 
-INSERT INTO cidade (idc, nome, idE) VALUES
-('1', 'Camaçari',1 );
+);
+
+INSERT INTO Pais (idP,nome,Continente) Values
+(1,'Brasil','Sul-Americano');
 
 
 
-SELECT * FROM estado;
-select * from cidade;
+
+INSERT INTO Estado (idE, nome, região,sigla) VALUES
+(1, 'Bahia', 'Nordeste','BA'),
+(2, 'São Paulo', 'Sudeste','SP'),
+(3, 'Acre', 'Sudoeste','AC');
+
+INSERT INTO cidade (idC, nome, idE) VALUES
+(1, 'Camaçari', 1),
+(2, 'Guarulhos', 2),
+(3, 'Rio Branco', 3);
+
+INSERT INTO endereço (idEN, bairro, rua, numero, idC, idE) VALUES
+(1, 'Gleba A', 'Radial A', 100, 1, 1),
+(2, 'Vila Augusta', 'Rua Augusta', 101, 2, 2),
+(3, 'Bosque', 'Rua do Bosque', 102, 3, 3);
+
+INSERT INTO Cliente (idCL,nome, cpf,data_nasc ,sexo,email,idEN)
+VALUES (1,'Leo', '203.432.453-21','2006-12-12','Mas','LEO@GMAIL.COM',1 ),
+ (2,'Ana', '203.432.453-21','1990-07-12','Fem','Ana@GMAIL.COM',2 ),
+ (3,'Carlos', '203.432.453-21','1974-02-23','Mas','Carlos@GMAIL.COM',3 );
 
 
-SELECT * FROM estado E
+
+
+
+SELECT * FROM Estado;
+SELECT * FROM cidade;
+SELECT * FROM endereço;
+SELECT * FROM Cliente;
+
+
+
+
+Select Cliente.nome
+from cliente
+inner join Estado ON Cliente.idCL = Estado.idE
+limit 3;
+
+
+
+
+SELECT *FROM Estado E
 INNER JOIN cidade C
-on E.ID = C.IDE;
+ON E.idE = C.idE;
