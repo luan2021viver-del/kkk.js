@@ -113,4 +113,9 @@ class Vaga {
     }
 
     @Override
-    public String toString
+    public String toString() {
+        return "Vaga Nº: " + numero + " | " + (veiculo != null ? veiculo.toString() : "Vaga Vazia");
+    }
+}
+
+     
