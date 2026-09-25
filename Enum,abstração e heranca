@@ -1,0 +1,116 @@
+import java.util.ArrayList;
+import java.util.List;
+
+enum TipoVeiculo {
+    CARRO,
+    MOTO
+}
+
+interface IValidavel {
+    boolean validarPlaca();
+}
+
+abstract class Veiculo implements IValidavel {
+    private String placa;
+    private int horasEstacionado;
+
+    private static int totalVeiculosAtendidos = 0;
+
+    public Veiculo(String placa, int horasEstacionado) {
+        setPlaca(placa);
+        this.horasEstacionado = horasEstacionado;
+        totalVeiculosAtendidos++;
+    }
+
+    public String getPlaca() {
+        return placa;
+    }
+
+    public void setPlaca(String placa) {
+        if (placa != null && placa.length() == 7) {
+            this.placa = placa;
+        }
+    }
+
+    public int getHorasEstacionado() {
+        return horasEstacionado;
+    }
+
+    public void setHorasEstacionado(int horasEstacionado) {
+        this.horasEstacionado = horasEstacionado;
+    }
+
+    public static int getTotalVeiculosAtendidos() {
+        return totalVeiculosAtendidos;
+    }
+
+    public abstract double calcularValorTotal();
+
+    @Override
+    public boolean validarPlaca() {
+        return placa != null && placa.length() == 7;
+    }
+
+    @Override
+    public String toString() {
+        return "Placa: " + placa +
+               ", Horas: " + horasEstacionado +
+               ", Valor: R$ " + calcularValorTotal();
+    }
+}
+
+class Carro extends Veiculo {
+    private TipoVeiculo tipo;
+
+    public Carro(String placa, int horasEstacionado) {
+        super(placa, horasEstacionado);
+        tipo = TipoVeiculo.CARRO;
+    }
+
+    public TipoVeiculo getTipo() {
+        return tipo;
+    }
+
+    @Override
+    public double calcularValorTotal() {
+        return getHorasEstacionado() * 10.0;
+    }
+}
+
+class Moto extends Veiculo {
+    private TipoVeiculo tipo;
+
+    public Moto(String placa, int horasEstacionado) {
+        super(placa, horasEstacionado);
+        tipo = TipoVeiculo.MOTO;
+    }
+
+    public TipoVeiculo getTipo() {
+        return tipo;
+    }
+
+    @Override
+    public double calcularValorTotal() {
+        return getHorasEstacionado() * 5.0;
+    }
+}
+
+class Vaga {
+    private int numero;
+    private Veiculo veiculo;
+
+    public Vaga(int numero, Veiculo veiculo) {
+        this.numero = numero;
+        this.veiculo = veiculo;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public Veiculo getVeiculo() {
+        return veiculo;
+    }
+
+    @Override
+    public String toString
