@@ -51,6 +51,12 @@ CREATE TABLE Cliente (
 INSERT INTO Pais (idP, nome, Continente) VALUES
 (1, 'Brasil', 'Sul-Americano');
 
+INSERT INTO Pais ( nome, Continente) VALUES
+( 'Canada', 'Norte-Americano');
+
+INSERT INTO Pais (nome) VALUES
+('Inglaterra');
+
 INSERT INTO Estado (idE, nome, região, sigla, idP) VALUES
 (1, 'Bahia', 'Nordeste', 'BA', 1),
 (2, 'São Paulo', 'Sudeste', 'SP', 1),
@@ -134,4 +140,4 @@ FROM Cliente
 LEFT JOIN endereço ON Cliente.idEN = endereço.idEN
 LEFT JOIN cidade ON endereço.idC = cidade.idC
 LEFT JOIN Estado ON cidade.idE = Estado.idE
-LEFT JOIN Pais ON Estado.idP = Pais.idP;
+right JOIN Pais ON Estado.idP = Pais.idP;
