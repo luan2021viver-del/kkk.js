@@ -1,0 +1,190 @@
+enum TipoVeiculo {
+    CARRO,
+    MOTO
+}
+
+interface IValidavel {
+    boolean validarPlaca();
+}
+
+abstract class Veiculo implements IValidavel {
+    private String placa;
+    private int horasEstacionado;
+    private static int totalVeiculosAtendidos = 0;
+
+    public Veiculo(String placa, int horasEstacionado) {
+        setPlaca(placa);
+        this.horasEstacionado = horasEstacionado;
+        totalVeiculosAtendidos++;
+    }
+
+    public String getPlaca() {
+        return placa;
+    }
+
+    public void setPlaca(String placa) {
+        if (placa != null && placa.length() == 7) {
+            this.placa = placa;
+        } else {
+            System.out.println("Placa inválida! A placa deve conter exatamente 7 caracteres.");
+        }
+    }
+
+    public int getHorasEstacionado() {
+        return horasEstacionado;
+    }
+
+    public void setHorasEstacionado(int horasEstacionado) {
+        this.horasEstacionado = horasEstacionado;
+    }
+
+    public static int getTotalVeiculosAtendidos() {
+        return totalVeiculosAtendidos;
+    }
+
+    @Override
+    public boolean validarPlaca() {
+        return this.placa != null && this.placa.length() == 7;
+    }
+
+    public abstract double calcularValorTotal();
+
+    @Override
+    public String toString() {
+        return "Placa: " + placa + " | Horas: " + horasEstacionado + "h | Total a Pagar: R$ " + calcularValorTotal();
+    }
+}
+
+class Carro extends Veiculo {
+    private TipoVeiculo tipo;
+
+    public Carro(String placa, int horasEstacionado) {
+        super(placa, horasEstacionado);
+        this.tipo = TipoVeiculo.CARRO;
+    }
+
+    public TipoVeiculo getTipo() {
+        return tipo;
+    }
+
+    @Override
+    public double calcularValorTotal() {
+        return getHorasEstacionado() * 10.00;
+    }
+}
+
+class Moto extends Veiculo {
+    private TipoVeiculo tipo;
+
+    public Moto(String placa, int horasEstacionado) {
+        super(placa, horasEstacionado);
+        this.tipo = TipoVeiculo.MOTO;
+    }
+
+    public TipoVeiculo getTipo() {
+        return tipo;
+    }
+
+    @Override
+    public double calcularValorTotal() {
+        return getHorasEstacionado() * 5.00;
+    }
+}
+
+class Vaga {
+    private int numero;
+    private Veiculo veiculo;
+
+    public Vaga(int numero) {
+        this.numero = numero;
+        this.veiculo = null;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    public Veiculo getVeiculo() {
+        return veiculo;
+    }
+
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
+    }
+
+    @Override
+    public String toString() {
+        String statusVeiculo = (veiculo != null) ? veiculo.toString() : "Vaga Vazia";
+        return "Vaga [Número: " + numero + "] -> " + statusVeiculo;
+    }
+}
+
+class Estacionamento {
+    private String nome;
+    private Vaga[] vagas;
+    private int capacidade;
+    private int totalVagasAdicionadas;
+
+    public Estacionamento(String nome, int capacidade) {
+        this.nome = nome;
+        this.capacidade = capacidade;
+        this.vagas = new Vaga[capacidade];
+        this.totalVagasAdicionadas = 0;
+    }
+
+    public void adicionarVaga(Vaga vaga) {
+        if (totalVagasAdicionadas < capacidade) {
+            vagas[totalVagasAdicionadas] = vaga;
+            totalVagasAdicionadas++;
+        }
+    }
+
+    public void estacionarVeiculo(int numeroVaga, Veiculo veiculo) {
+        for (int i = 0; i < totalVagasAdicionadas; i++) {
+            if (vagas[i].getNumero() == numeroVaga) {
+                vagas[i].setVeiculo(veiculo);
+                return;
+            }
+        }
+        System.out.println("Vaga número " + numeroVaga + " não encontrada.");
+    }
+
+    public void listarVagas() {
+        System.out.println("=== Listagem de Vagas do Estacionamento: " + nome + " ===");
+        for (int i = 0; i < totalVagasAdicionadas; i++) {
+            System.out.println(vagas[i]);
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("--- Teste de Validação de Placa Inválida ---");
+        Carro testeInvalido = new Carro("ABC", 2);
+
+        System.out.println("\n--- Criação de Veículos Válidos ---");
+        Carro meuCarro = new Carro("ABC1234", 3);
+        Moto minhaMoto = new Moto("XYZ5678", 4);
+
+        Estacionamento estacionamento = new Estacionamento("SENAI Central", 2);
+        Vaga vaga1 = new Vaga(101);
+        Vaga vaga2 = new Vaga(102);
+
+        estacionamento.adicionarVaga(vaga1);
+        estacionamento.adicionarVaga(vaga2);
+
+        estacionamento.estacionarVeiculo(101, meuCarro);
+        estacionamento.estacionarVeiculo(102, minhaMoto);
+
+        System.out.println();
+        estacionamento.listarVagas();
+
+        System.out.println("\n--------------------------------------------------");
+        System.out.println("Total geral de veículos cadastrados (Atributo Static): " + Veiculo.getTotalVeiculosAtendidos());
+        System.out.println("--------------------------------------------------");
+    }
+}
