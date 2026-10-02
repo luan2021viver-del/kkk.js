@@ -1,0 +1,68 @@
+ public enum Categorias {
+	 CARRO,
+	 CAMINHAO,
+	 MOTOCICLETA;
+	 
+}
+
+
+public abstract class VeiculosT {
+	
+	private String placa;
+	private String modelo;
+	private String marca;
+	private double valorDiaria;
+	private Categorias categoria;
+	private EstadoVeiculo estado;
+	
+	public String getPlaca() {
+		return placa;
+	}
+	public void setPlaca(String placa) {
+		if (placa == null || placa.isEmpty()) {
+			
+		}
+		this.placa = placa;
+	}
+	public String getModelo() {
+		return modelo;
+	}
+	public void setModelo(String modelo) {
+		this.modelo = modelo;
+	}
+	public String getMarca() {
+		return marca;
+	}
+	public void setMarca(String marca) {
+		this.marca = marca;
+	}
+	public double getValorDiaria() {
+		return valorDiaria;
+	}
+	public void setValorDiaria(double valorDiaria) {
+		if(valorDiaria >0) {
+		this.valorDiaria = valorDiaria;
+		}
+	}
+	public Categorias getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(Categorias categoria) {
+		this.categoria = categoria;
+	}
+	public EstadoVeiculo getEstado() {
+		return estado;
+	}
+	public void setEstado(EstadoVeiculo estado) {
+		this.estado = estado;
+	}
+}
+	
+public enum EstadoVeiculo {
+	
+		Disponivel,
+		EM_MANUTENÇAO,
+		NA_ESTRADA
+	
+
+}
