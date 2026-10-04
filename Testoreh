@@ -1,0 +1,306 @@
+import java.util.ArrayList;
+import java.util.Locale;
+
+enum Categoria {
+    SMARTPHONE,
+    LAPTOP,
+    TABLET
+}
+
+enum Estado {
+    NOVO,
+    MOSTRUARIO,
+    RECONDICIONADO
+}
+
+abstract class Produto {
+    private static int totalProdutos = 0;
+
+    private String codigo;
+    private String nome;
+    private String marca;
+    private double preco;
+    private Categoria categoria;
+    private Estado estado;
+
+    public Produto(String codigo, String nome, String marca, double preco, Categoria categoria, Estado estado) {
+        if (codigo == null || codigo.isEmpty()) {
+            throw new IllegalArgumentException("O codigo nao pode ser vazio.");
+        }
+
+        if (preco <= 0) {
+            throw new IllegalArgumentException("O preco deve ser maior que zero.");
+        }
+
+        this.codigo = codigo;
+        this.nome = nome;
+        this.marca = marca;
+        this.preco = preco;
+        this.categoria = categoria;
+        this.estado = estado;
+
+        totalProdutos++;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public void setPreco(double preco) {
+        if (preco <= 0) {
+            throw new IllegalArgumentException("O preco deve ser maior que zero.");
+        }
+
+        this.preco = preco;
+    }
+
+    public static int getTotalProdutos() {
+        return totalProdutos;
+    }
+
+    public abstract String fichaTecnica();
+}
+
+class Smartphone extends Produto {
+    private int capacidadeBateria;
+    private int armazenamento;
+
+    public Smartphone(String codigo, String nome, String marca, double preco,
+                      Estado estado, int capacidadeBateria, int armazenamento) {
+
+        super(codigo, nome, marca, preco, Categoria.SMARTPHONE, estado);
+
+        this.capacidadeBateria = capacidadeBateria;
+        this.armazenamento = armazenamento;
+    }
+
+    @Override
+    public String fichaTecnica() {
+        return "Smartphone: " + getNome() +
+                " | Marca: " + getMarca() +
+                " | Bateria: " + capacidadeBateria + " mAh" +
+                " | Armazenamento: " + armazenamento + " GB";
+    }
+}
+
+class Laptop extends Produto {
+    private double tamanhoTela;
+    private String modeloProcessador;
+
+    public Laptop(String codigo, String nome, String marca, double preco,
+                  Estado estado, double tamanhoTela, String modeloProcessador) {
+
+        super(codigo, nome, marca, preco, Categoria.LAPTOP, estado);
+
+        this.tamanhoTela = tamanhoTela;
+        this.modeloProcessador = modeloProcessador;
+    }
+
+    @Override
+    public String fichaTecnica() {
+        return "Laptop: " + getNome() +
+                " | Marca: " + getMarca() +
+                " | Tela: " + tamanhoTela + " polegadas" +
+                " | Processador: " + modeloProcessador;
+    }
+}
+
+class Formatador {
+    public static String formatarMoeda(double valor) {
+        return String.format(Locale.US, "R$ %.2f", valor);
+    }
+}
+
+interface GestaoInventario {
+    void adicionarProduto(Produto produto);
+    void removerProduto(String codigo);
+    Produto procurarProduto(String codigo);
+    ArrayList<Produto> procurarPorCategoria(Categoria categoria);
+    void atualizarPreco(String codigo, double novoPreco);
+    void listarProdutos();
+}
+
+class Inventario implements GestaoInventario {
+    private ArrayList<Produto> produtos;
+
+    public Inventario() {
+        produtos = new ArrayList<>();
+    }
+
+    @Override
+    public void adicionarProduto(Produto produto) {
+        if (procurarProduto(produto.getCodigo()) != null) {
+            System.out.println("Ja existe um produto com esse codigo.");
+            return;
+        }
+
+        produtos.add(produto);
+        System.out.println("Produto adicionado com sucesso.");
+    }
+
+    @Override
+    public void removerProduto(String codigo) {
+        Produto produto = procurarProduto(codigo);
+
+        if (produto != null) {
+            produtos.remove(produto);
+            System.out.println("Produto removido com sucesso.");
+        } else {
+            System.out.println("Produto nao encontrado.");
+        }
+    }
+
+    @Override
+    public Produto procurarProduto(String codigo) {
+        for (Produto produto : produtos) {
+            if (produto.getCodigo().equals(codigo)) {
+                return produto;
+            }
+        }
+
+        return null;
+    }
+
+    @Override
+    public ArrayList<Produto> procurarPorCategoria(Categoria categoria) {
+        ArrayList<Produto> resultado = new ArrayList<>();
+
+        for (Produto produto : produtos) {
+            if (produto.getCategoria() == categoria) {
+                resultado.add(produto);
+            }
+        }
+
+        return resultado;
+    }
+
+    @Override
+    public void atualizarPreco(String codigo, double novoPreco) {
+        Produto produto = procurarProduto(codigo);
+
+        if (produto != null) {
+            produto.setPreco(novoPreco);
+            System.out.println("Preco atualizado com sucesso.");
+        } else {
+            System.out.println("Produto nao encontrado.");
+        }
+    }
+
+    @Override
+    public void listarProdutos() {
+        if (produtos.isEmpty()) {
+            System.out.println("Inventario vazio.");
+            return;
+        }
+
+        for (Produto produto : produtos) {
+            System.out.println("--------------------------------");
+            System.out.println("Codigo: " + produto.getCodigo());
+            System.out.println("Nome: " + produto.getNome());
+            System.out.println("Marca: " + produto.getMarca());
+            System.out.println("Preco: " + Formatador.formatarMoeda(produto.getPreco()));
+            System.out.println("Categoria: " + produto.getCategoria());
+            System.out.println("Estado: " + produto.getEstado());
+            System.out.println(produto.fichaTecnica());
+        }
+
+        System.out.println("--------------------------------");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        Smartphone celular1 = new Smartphone(
+                "S001",
+                "Galaxy S24",
+                "Samsung",
+                3500.00,
+                Estado.NOVO,
+                4000,
+                256
+        );
+
+        Smartphone celular2 = new Smartphone(
+                "S002",
+                "iPhone 15",
+                "Apple",
+                4500.00,
+                Estado.MOSTRUARIO,
+                3349,
+                128
+        );
+
+        Laptop laptop1 = new Laptop(
+                "L001",
+                "IdeaPad 3",
+                "Lenovo",
+                3200.00,
+                Estado.RECONDICIONADO,
+                15.6,
+                "Intel Core i5"
+        );
+
+        System.out.println("Quantidade total de produtos criados: "
+                + Produto.getTotalProdutos());
+
+        Inventario inventario = new Inventario();
+
+        inventario.adicionarProduto(celular1);
+        inventario.adicionarProduto(celular2);
+        inventario.adicionarProduto(laptop1);
+
+        System.out.println();
+        System.out.println("LISTA DO INVENTARIO");
+        inventario.listarProdutos();
+
+        System.out.println();
+        System.out.println("PRODUTOS DA CATEGORIA SMARTPHONE");
+
+        ArrayList<Produto> smartphones =
+                inventario.procurarPorCategoria(Categoria.SMARTPHONE);
+
+        for (Produto produto : smartphones) {
+            System.out.println(produto.fichaTecnica());
+        }
+
+        System.out.println();
+        System.out.println("ATUALIZANDO PRECO");
+
+        inventario.atualizarPreco("S001", 3300.00);
+
+        System.out.println();
+        System.out.println("REMOVENDO PRODUTO");
+
+        inventario.removerProduto("S002");
+
+        System.out.println();
+        System.out.println("INVENTARIO FINAL");
+
+        inventario.listarProdutos();
+
+        System.out.println();
+        System.out.println("Preco final do Galaxy S24: "
+                + Formatador.formatarMoeda(celular1.getPreco()));
+    }
+}
