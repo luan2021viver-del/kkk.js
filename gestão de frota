@@ -1,68 +1,336 @@
- public enum Categorias {
-	 CARRO,
-	 CAMINHAO,
-	 MOTOCICLETA;
-	 
+ \\CategoriaVeiculo
+
+package movemais.enums;
+
+public enum CategoriaVeiculo {
+    CARRO,
+    CAMINHAO,
+    MOTOCICLETA,
+    ONIBUS
+}
+\\Veiculo
+public abstract class Veiculo {
+    private static int contadorGlobal = 0;
+
+    private String codigo;
+    private String modelo;
+    private String marca;
+    private double valorDiaria;
+    private CategoriaVeiculo categoria;
+    private EstadoVeiculo estado;
+
+    public Veiculo(String codigo, String modelo, String marca, double valorDiaria, CategoriaVeiculo categoria, EstadoVeiculo estado) {
+        setCodigo(codigo);
+        setModelo(modelo);
+        setMarca(marca);
+        setValorDiaria(valorDiaria);
+        setCategoria(categoria);
+        setEstado(estado);
+        contadorGlobal++;
+    }
+
+    public static int getContadorGlobal() {
+        return contadorGlobal;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        if (codigo == null || codigo.trim().isEmpty()) {
+            throw new IllegalArgumentException("O código identificador não pode ser nulo nem vazio.");
+        }
+        this.codigo = codigo;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public double getValorDiaria() {
+        return valorDiaria;
+    }
+
+    public void setValorDiaria(double valorDiaria) {
+        if (valorDiaria <= 0) {
+            throw new IllegalArgumentException("O valor da diária não pode ser negativo nem zero.");
+        }
+        this.valorDiaria = valorDiaria;
+    }
+
+    public CategoriaVeiculo getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(CategoriaVeiculo categoria) {
+        if (categoria == null) {
+            throw new IllegalArgumentException("A categoria não pode ser nula.");
+        }
+        this.categoria = categoria;
+    }
+
+    public EstadoVeiculo getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoVeiculo estado) {
+        if (estado == null) {
+            throw new IllegalArgumentException("O estado não pode ser nulo.");
+        }
+        this.estado = estado;
+    }
+
+    public abstract void exibirFichaTecnica();
+}
+
 }
 
 
-public abstract class VeiculosT {
-	
-	private String placa;
-	private String modelo;
-	private String marca;
-	private double valorDiaria;
-	private Categorias categoria;
-	private EstadoVeiculo estado;
-	
-	public String getPlaca() {
-		return placa;
-	}
-	public void setPlaca(String placa) {
-		if (placa == null || placa.isEmpty()) {
-			
-		}
-		this.placa = placa;
-	}
-	public String getModelo() {
-		return modelo;
-	}
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
-	}
-	public String getMarca() {
-		return marca;
-	}
-	public void setMarca(String marca) {
-		this.marca = marca;
-	}
-	public double getValorDiaria() {
-		return valorDiaria;
-	}
-	public void setValorDiaria(double valorDiaria) {
-		if(valorDiaria >0) {
-		this.valorDiaria = valorDiaria;
-		}
-	}
-	public Categorias getCategoria() {
-		return categoria;
-	}
-	public void setCategoria(Categorias categoria) {
-		this.categoria = categoria;
-	}
-	public EstadoVeiculo getEstado() {
-		return estado;
-	}
-	public void setEstado(EstadoVeiculo estado) {
-		this.estado = estado;
-	}
+\\carro
+
+
+public class Carro extends Veiculo {
+    private int capacidadePortaMalas; // em litros
+    private String tipoCombustivel; // ex: Flex, Gasolina, Elétrico
+
+    public Carro(String codigo, String modelo, String marca, double valorDiaria, EstadoVeiculo estado, int capacidadePortaMalas, String tipoCombustivel) {
+        super(codigo, modelo, marca, valorDiaria, CategoriaVeiculo.CARRO, estado);
+        this.capacidadePortaMalas = capacidadePortaMalas;
+        this.tipoCombustivel = tipoCombustivel;
+    }
+
+    public int getCapacidadePortaMalas() {
+        return capacidadePortaMalas;
+    }
+
+    public void setCapacidadePortaMalas(int capacidadePortaMalas) {
+        this.capacidadePortaMalas = capacidadePortaMalas;
+    }
+
+    public String getTipoCombustivel() {
+        return tipoCombustivel;
+    }
+
+    public void setTipoCombustivel(String tipoCombustivel) {
+        this.tipoCombustivel = tipoCombustivel;
+    }
+
+    @Override
+    public void exibirFichaTecnica() {
+        System.out.println("=== Ficha Técnica: Carro ===");
+        System.out.println("Código: " + getCodigo());
+        System.out.println("Marca/Modelo: " + getMarca() + " " + getModelo());
+        System.out.println("Categoria: " + getCategoria());
+        System.out.println("Estado: " + getEstado());
+        System.out.println("Diária: " + FormatadorMoeda.formatar(getValorDiaria()));
+        System.out.println("Porta-malas: " + capacidadePortaMalas + " litros");
+        System.out.println("Combustível: " + tipoCombustivel);
+        System.out.println("-----------------------------------");
+    }
 }
-	
+
+
+\\caminhão 
+
+public class Caminhao extends Veiculo {
+    private double capacidadeCarga; // em toneladas
+    private int numeroEixos;
+
+    public Caminhao(String codigo, String modelo, String marca, double valorDiaria, EstadoVeiculo estado, double capacidadeCarga, int numeroEixos) {
+        super(codigo, modelo, marca, valorDiaria, CategoriaVeiculo.CAMINHAO, estado);
+        this.capacidadeCarga = capacidadeCarga;
+        this.numeroEixos = numeroEixos;
+    }
+
+    public double getCapacidadeCarga() {
+        return capacidadeCarga;
+    }
+
+    public void setCapacidadeCarga(double capacidadeCarga) {
+        this.capacidadeCarga = capacidadeCarga;
+    }
+
+    public int getNumeroEixos() {
+        return numeroEixos;
+    }
+
+    public void setNumeroEixos(int numeroEixos) {
+        this.numeroEixos = numeroEixos;
+    }
+
+    @Override
+    public void exibirFichaTecnica() {
+        System.out.println("=== Ficha Técnica: Caminhão ===");
+        System.out.println("Código: " + getCodigo());
+        System.out.println("Marca/Modelo: " + getMarca() + " " + getModelo());
+        System.out.println("Categoria: " + getCategoria());
+        System.out.println("Estado: " + getEstado());
+        System.out.println("Diária: " + FormatadorMoeda.formatar(getValorDiaria()));
+        System.out.println("Capacidade de Carga: " + capacidadeCarga + " toneladas");
+        System.out.println("Número de Eixos: " + numeroEixos);
+        System.out.println("-----------------------------------");
+    }
+}
+
+
+
+
+
+public interface OperacoesFrota {
+    boolean adicionarVeiculo(Veiculo veiculo);
+    boolean removerVeiculo(String codigo);
+    Veiculo procurarVeiculo(String codigo);
+    java.util.List<Veiculo> procurarPorCategoria(CategoriaVeiculo categoria);
+    boolean atualizarValorDiaria(String codigo, double novoValor);
+    void listarFrota();
+}
+
+
+
+public class GestaoFrota implements OperacoesFrota {
+    private java.util.List<Veiculo> frota;
+
+    public GestaoFrota() {
+        this.frota = new java.util.ArrayList<>();
+    }
+
+    @Override
+    public boolean adicionarVeiculo(Veiculo veiculo) {
+        if (veiculo == null) return false;
+        for (Veiculo v : frota) {
+            if (v.getCodigo().equalsIgnoreCase(veiculo.getCodigo())) {
+                System.out.println("Erro: Já existe um veículo com o código " + veiculo.getCodigo());
+                return false;
+            }
+        }
+        frota.add(veiculo);
+        System.out.println("Veículo " + veiculo.getCodigo() + " adicionado com sucesso.");
+        return true;
+    }
+
+    @Override
+    public boolean removerVeiculo(String codigo) {
+        Veiculo v = procurarVeiculo(codigo);
+        if (v != null) {
+            frota.remove(v);
+            System.out.println("Veículo " + codigo + " removido com sucesso.");
+            return true;
+        }
+        System.out.println("Erro: Veículo com código " + codigo + " não encontrado para remoção.");
+        return false;
+    }
+
+    @Override
+    public Veiculo procurarVeiculo(String codigo) {
+        for (Veiculo v : frota) {
+            if (v.getCodigo().equalsIgnoreCase(codigo)) {
+                return v;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public java.util.List<Veiculo> procurarPorCategoria(CategoriaVeiculo categoria) {
+        java.util.List<Veiculo> resultado = new java.util.ArrayList<>();
+        for (Veiculo v : frota) {
+            if (v.getCategoria() == categoria) {
+                resultado.add(v);
+            }
+        }
+        return resultado;
+    }
+
+    @Override
+    public boolean atualizarValorDiaria(String codigo, double novoValor) {
+        Veiculo v = procurarVeiculo(codigo);
+        if (v != null) {
+            v.setValorDiaria(novoValor);
+            System.out.println("Valor da diária do veículo " + codigo + " atualizado com sucesso.");
+            return true;
+        }
+        System.out.println("Erro: Veículo com código " + codigo + " não encontrado.");
+        return false;
+    }
+
+    @Override
+    public void listarFrota() {
+        if (frota.isEmpty()) {
+            System.out.println("A frota está vazia.");
+            return;
+        }
+        System.out.println("\n=== LISTAGEM COMPLETA DA FROTA ===");
+        for (Veiculo v : frota) {
+            v.exibirFichaTecnica();
+        }
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("=== SISTEMA DE GESTÃO DE FROTA - MOVEMAIS ===\n");
+
+        System.out.println("--- 1. Instanciação de Veículos ---");
+        Carro carro1 = new Carro("CAR-001", "Corolla", "Toyota", 150.0, EstadoVeiculo.DISPONIVEL, 470, "Flex");
+        Carro carro2 = new Carro("CAR-002", "Civic", "Honda", 160.0, EstadoVeiculo.EM_MANUTENCAO, 519, "Gasolina");
+        Caminhao caminhao1 = new Caminhao("CAM-901", "FH 540", "Volvo", 650.0, EstadoVeiculo.EM_TRANSITO, 45.0, 6);
+
+        System.out.println("\n--- 2. Consulta Global de Instâncias ---");
+        System.out.println("Total de veículos criados no sistema: " + Veiculo.getContadorGlobal());
+
+        System.out.println("\n--- 3. Adição à Frota ---");
+        GestaoFrota gestao = new GestaoFrota();
+        gestao.adicionarVeiculo(carro1);
+        gestao.adicionarVeiculo(carro2);
+        gestao.adicionarVeiculo(caminhao1);
+
+        gestao.adicionarVeiculo(new Carro("CAR-001", "Etios", "Toyota", 100.0, EstadoVeiculo.DISPONIVEL, 300, "Flex"));
+
+        System.out.println("\n--- 4. Listagem Inicial da Frota ---");
+        gestao.listarFrota();
+
+        System.out.println("\n--- 5. Busca Filtrada por Categoria (CARRO) ---");
+        java.util.List<Veiculo> carros = gestao.procurarPorCategoria(CategoriaVeiculo.CARRO);
+        for (Veiculo v : carros) {
+            v.exibirFichaTecnica();
+        }
+
+        System.out.println("\n--- 6. Operações de Manutenção (Atualização e Remoção) ---");
+        gestao.atualizarValorDiaria("CAR-001", 185.50);
+        gestao.removerVeiculo("CAR-002");
+
+        System.out.println("\n--- 7. Validação Final da Frota ---");
+        gestao.listarFrota();
+
+        System.out.println("Exemplo de formatação monetária avulsa via utilitário: " + FormatadorMoeda.formatar(2500.75));
+    }
+}
+
+
 public enum EstadoVeiculo {
-	
-		Disponivel,
-		EM_MANUTENÇAO,
-		NA_ESTRADA
-	
+    DISPONIVEL,
+    EM_MANUTENCAO,
+    EM_TRANSITO
+}
 
+
+public class FormatadorMoeda {
+    private static final java.util.Locale LOCALE_BR = new java.util.Locale("pt", "BR");
+
+    public static String formatar(double valor) {
+        java.text.NumberFormat nf = java.text.NumberFormat.getCurrencyInstance(LOCALE_BR);
+        return nf.format(valor);
+    }
 }
