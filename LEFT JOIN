@@ -1,0 +1,66 @@
+DROP DATABASE IF EXISTS db_livraria;
+
+CREATE DATABASE db_livraria;
+
+USE db_livraria;
+
+CREATE TABLE livros (
+    id_livro INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    Autor VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE leitores (
+    id_lei INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(200) UNIQUE NOT NULL
+    
+);
+
+CREATE TABLE Emprestimos (
+    id_EM INT PRIMARY KEY AUTO_INCREMENT,
+	id_livro INT,
+	id_lei INT,
+   data_emprestimo date not null,
+   data_prevista DATE not null,
+   data_devolucao DATE,
+    FOREIGN KEY (id_lei) REFERENCES leitores(id_lei),
+    FOREIGN KEY (id_livro) REFERENCES livros(id_livro)
+);
+
+INSERT INTO livros (id_livro, nome, Autor) VALUES
+(1, 'A', 'Machado de Assis'),
+(2, 'B', 'Jorge Amado'),
+('3', 'C', 'José de Alencar'),
+('4', 'D', 'Mauricio de Souza');
+
+INSERT INTO leitores (id_lei,nome, email) VALUES
+(1,' Leo',  'Leo@brasil.com'),
+(2, 'Ana',  'Ana@nacional.com'),
+(3, 'Marcos',  'Marcos@nacional.com'),
+(4,'Carlos', 'Carlos@email.com');
+
+INSERT INTO Emprestimos(id_EM,id_livro,id_lei,data_emprestimo, data_prevista ,data_devolucao) VALUES
+(1,1,1,'2026-07-07','2026-08-08','2026-08-08'),
+(2,2,2,'2026-09-23','2026-09-30', ''),
+(3,3,3,'2026-12-05','2026-12-22', '2027-01-28');
+
+INSERT INTO Emprestimos(id_lei) VALUES
+(4);
+
+
+
+
+SELECT * FROM livros;
+
+
+SELECT * FROM leitores;
+
+
+SELECT * FROM Emprestimos;
+
+
+
+SELECT leitores.nome,Emprestimos.id_livro
+from leitores
+LEFT join  Emprestimos ON leitores.id_lei = Emprestimos.id_lei;
