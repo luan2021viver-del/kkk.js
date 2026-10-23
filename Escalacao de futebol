@@ -1,33 +1,33 @@
 \\SituacaoEscalacao.java
 package br.senai.poo.lista07;
 
-public enum SituacaoEscalacao {
+
+public enum EscalacaoSituacao {
     TITULAR(11),
     RESERVA(12);
 
-    private int quantidadeMaxima;
+    private Integer quantidadeMaxima;
 
-    SituacaoEscalacao(int quantidadeMaxima) {
+    EscalacaoSituacao(Integer quantidadeMaxima) {
         this.quantidadeMaxima = quantidadeMaxima;
     }
 
-    public int getQuantidadeMaxima() {
+    public Integer getQuantidadeMaxima() {
         return quantidadeMaxima;
     }
 }
-
 \\jogador.java
 package br.senai.poo.lista07;
-
 public class Jogador {
 
     private String nome;
-    private int numeroCamisa;
-    private SituacaoEscalacao situacaoEscalacao;
+    private Integer numeroCamisa;
+    private EscalacaoSituacao escalacaoSituacao;
 
-    public Jogador(String nome, int numeroCamisa) {
+    public Jogador(String nome, Integer numeroCamisa) {
         this.nome = nome;
         this.numeroCamisa = numeroCamisa;
+       
     }
 
     public String getNome() {
@@ -46,8 +46,8 @@ public class Jogador {
         this.numeroCamisa = numeroCamisa;
     }
 
-    public SituacaoEscalacao getSituacaoEscalacao() {
-        return situacaoEscalacao;
+    public EscalacaoSituacao get void EscalacaoSituacao() {
+        return EscalacaoSituacao();
     }
 
     public void setSituacaoEscalacao(SituacaoEscalacao situacaoEscalacao) {
@@ -68,96 +68,50 @@ package br.senai.poo.lista07;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Time {
-
-    private String nome;
-    private String nomeTecnico;
-    private List<Jogador> jogadores;
-    private List<Jogador> jogadoresEscalados;
-
-    public Time(String nome, String nomeTecnico) {
-        this.nome = nome;
-        this.nomeTecnico = nomeTecnico;
-        jogadores = new ArrayList<>();
-        jogadoresEscalados = new ArrayList<>();
-    }
-
-    public void contratarJogador(String nome, int numeroCamisa) {
-        Jogador jogador = new Jogador(nome, numeroCamisa);
-        jogadores.add(jogador);
-
-        System.out.println("Jogador contratado: " + nome);
-    }
-
-    public boolean escalarJogador(String nome, SituacaoEscalacao situacaoEscalacao) {
-
-        Jogador jogadorEncontrado = null;
-
-        for (Jogador jogador : jogadores) {
-            if (jogador.getNome().equalsIgnoreCase(nome)) {
-                jogadorEncontrado = jogador;
-                break;
-            }
-        }
-
-        if (jogadorEncontrado == null) {
-            return false;
-        }
-
-        if (jogadoresEscalados.contains(jogadorEncontrado)) {
-            return false;
-        }
-
-        int quantidade = 0;
-
-        for (Jogador jogador : jogadoresEscalados) {
-            if (jogador.getSituacaoEscalacao() == situacaoEscalacao) {
-                quantidade++;
-            }
-        }
-
-        if (quantidade >= situacaoEscalacao.getQuantidadeMaxima()) {
-            return false;
-        }
-
-        jogadorEncontrado.setSituacaoEscalacao(situacaoEscalacao);
-        jogadoresEscalados.add(jogadorEncontrado);
-
-        return true;
-    }
-
-    public void removerJogadorEscalacao(String nome) {
-        for (Jogador jogador : jogadoresEscalados) {
-            if (jogador.getNome().equalsIgnoreCase(nome)) {
-                jogadoresEscalados.remove(jogador);
-                jogador.setSituacaoEscalacao(null);
-                System.out.println("Jogador removido da escalação.");
-                return;
-            }
-        }
-
-        System.out.println("Jogador não encontrado na escalação.");
-    }
-
-    public List<Jogador> obterEscalacao() {
-        return new ArrayList<>(jogadoresEscalados);
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getNomeTecnico() {
-        return nomeTecnico;
-    }
-
-    public void setNomeTecnico(String nomeTecnico) {
-        this.nomeTecnico = nomeTecnico;
-    }
+public class time {
+	
+	private String nome;
+	private String nomeTecnico;
+	private Arraylist<Jogador> jogadores = new ArrayList<Jogador>();
+	private ArrayList<Jogador> jogadoresEscalados = new ArrayList<jogador>();
+	
+	public Time(String nome, String nomeTecnico ) {
+		this.nome = nome;
+		this.nomeTecnico = nomeTecnico;
+	}
+    
+	public void contratarJogador(String noome, Integer numeroCamisa) {
+		Jogador jogador = new Jogador(nome, numeroCamisa);
+		jogadores.add(Jogador);
+	}
+	private Jogador buscarContratado(String nome) {
+		for (Jogador j : jogadores) {
+			if(j.getNome().equalsIgnoreCase(nome)) {
+				return j;
+			}
+		}
+		return null;
+	}
+	
+	public Boolean escalarJogador(String nome,EscalacaoSituacaoEnum escalacaoSituacao ) {
+		if(buscarContratado(nome) == null ) {
+			return false;
+		}
+		if (buscarEscalados(nome)!=null) {
+			return false;
+		}
+		buscarContratado(nome).setEscalacaoSituacao(escalacaoSituacao);
+		jogadoresEscalados.add(buscarContratado(nome));
+		return true;
+	}
+	public void removerJogadorEscalacao(String nome) {
+		Jogador jogador buscarEscalados(nome);
+			if(jogador ! = null) {
+				jogadorEsacalados.remove(jogador);
+		}
+	}
+	public List<Jogador> obter
+	
 }
 
 
