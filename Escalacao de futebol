@@ -1,157 +1,228 @@
 \\SituacaoEscalacao.java
-package br.senai.poo.lista07;
+package br.senai.pa.lista07;
 
+public enum SituacaoEscalacaoEnum {
+	
+	TITULAR(11),RESERVA(12);
+	
+	private Integer qtdMaxima;
 
-public enum EscalacaoSituacao {
-    TITULAR(11),
-    RESERVA(12);
+	private SituacaoEscalacaoEnum(Integer qtdMaxima) {
+		this.qtdMaxima = qtdMaxima;
+	}
 
-    private Integer quantidadeMaxima;
+	public Integer getQtdMaxima() {
+		return qtdMaxima;
+	}	
 
-    EscalacaoSituacao(Integer quantidadeMaxima) {
-        this.quantidadeMaxima = quantidadeMaxima;
-    }
-
-    public Integer getQuantidadeMaxima() {
-        return quantidadeMaxima;
-    }
 }
-\\jogador.java
-package br.senai.poo.lista07;
+
+package br.senai.pa.lista07;
+
 public class Jogador {
 
-    private String nome;
-    private Integer numeroCamisa;
-    private EscalacaoSituacao escalacaoSituacao;
+	private String nome;
+	private Integer numeroCamisa;
+	private SituacaoEscalacaoEnum situacaoEscalacao;
+	
+	public Jogador(String nome, Integer numeroCamisa) {
+		super();
+		this.nome = nome;
+		this.numeroCamisa = numeroCamisa;
+		this.situacaoEscalacao = null;
+	}
 
-    public Jogador(String nome, Integer numeroCamisa) {
-        this.nome = nome;
-        this.numeroCamisa = numeroCamisa;
-       
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public Integer getNumeroCamisa() {
+		return numeroCamisa;
+	}
 
-    public int getNumeroCamisa() {
-        return numeroCamisa;
-    }
+	public void setNumeroCamisa(Integer numeroCamisa) {
+		this.numeroCamisa = numeroCamisa;
+	}
 
-    public void setNumeroCamisa(int numeroCamisa) {
-        this.numeroCamisa = numeroCamisa;
-    }
+	public SituacaoEscalacaoEnum getSituacaoEscalacao() {
+		return situacaoEscalacao;
+	}
 
-    public EscalacaoSituacao get void EscalacaoSituacao() {
-        return EscalacaoSituacao();
-    }
+	public void setSituacaoEscalacao(SituacaoEscalacaoEnum situacaoEscalacao) {
+		this.situacaoEscalacao = situacaoEscalacao;
+	}
 
-    public void setSituacaoEscalacao(SituacaoEscalacao situacaoEscalacao) {
-        this.situacaoEscalacao = situacaoEscalacao;
-    }
-
-    @Override
-    public String toString() {
-        return "Nome: " + nome
-                + " | Camisa: " + numeroCamisa
-                + " | Situação: " + situacaoEscalacao;
-    }
+	@Override
+	public String toString() {
+		return "Jogador [nome=" + nome + ", numeroCamisa=" + numeroCamisa + ", situacaoEscalacao=" + situacaoEscalacao
+				+ "]";
+	}
+	
+		
 }
 
 \\time.java
-package br.senai.poo.lista07;
+package br.senai.pa.lista07;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class time {
-	
+public class Time {
+
 	private String nome;
 	private String nomeTecnico;
-	private Arraylist<Jogador> jogadores = new ArrayList<Jogador>();
-	private ArrayList<Jogador> jogadoresEscalados = new ArrayList<jogador>();
+	private ArrayList<Jogador> jogadores = new ArrayList<Jogador>();
+	private ArrayList<Jogador> jogadoresEscalados = new ArrayList<Jogador>();
 	
-	public Time(String nome, String nomeTecnico ) {
+	public Time(String nome, String nomeTecnico) {
+		super();
 		this.nome = nome;
 		this.nomeTecnico = nomeTecnico;
 	}
-    
-	public void contratarJogador(String noome, Integer numeroCamisa) {
+	
+	public void contratarJogador(String nome, Integer numeroCamisa) {
 		Jogador jogador = new Jogador(nome, numeroCamisa);
-		jogadores.add(Jogador);
+		jogadores.add(jogador);
 	}
-	private Jogador buscarContratado(String nome) {
+
+	private Jogador encontrarJogador(String nomeJogador) {
 		for (Jogador j : jogadores) {
-			if(j.getNome().equalsIgnoreCase(nome)) {
+			if(j.getNome().equalsIgnoreCase(nomeJogador)) {
 				return j;
 			}
 		}
 		return null;
+	}	
+	
+	public Boolean escalarJogador(String nomeJogador, SituacaoEscalacaoEnum situacaoEscalacao) {
+		Jogador jogador = encontrarJogador(nomeJogador);
+		if(jogador == null) {
+			return false;
+		}
+		if(jogador.getSituacaoEscalacao() != null) {
+			return false;
+		}
+		if(calcularQtdJogadores(situacaoEscalacao) >= situacaoEscalacao.getQtdMaxima()) {
+			return false;
+		}
+		jogador.setSituacaoEscalacao(situacaoEscalacao);
+		jogadoresEscalados.add(jogador);	
+		return true;
+		
 	}
 	
-	public Boolean escalarJogador(String nome,EscalacaoSituacaoEnum escalacaoSituacao ) {
-		if(buscarContratado(nome) == null ) {
-			return false;
-		}
-		if (buscarEscalados(nome)!=null) {
-			return false;
-		}
-		buscarContratado(nome).setEscalacaoSituacao(escalacaoSituacao);
-		jogadoresEscalados.add(buscarContratado(nome));
-		return true;
-	}
 	public void removerJogadorEscalacao(String nome) {
-		Jogador jogador buscarEscalados(nome);
-			if(jogador ! = null) {
-				jogadorEsacalados.remove(jogador);
+		Jogador jogador = encontrarJogador(nome);
+		if(jogador != null) {
+			jogador.setSituacaoEscalacao(null);
+			jogadoresEscalados.remove(jogador);
 		}
 	}
-	public List<Jogador> obter
+	
+	public List<Jogador> obterEscalacao(){
+		return jogadoresEscalados;
+	}
+	
+	private Integer calcularQtdJogadores(SituacaoEscalacaoEnum situacaoEscalacao) {
+		Integer qtd = 0;
+		for (Jogador jogador : jogadores) {
+			if(situacaoEscalacao.equals(jogador.getSituacaoEscalacao())){
+				qtd++;
+			}
+		}
+		return qtd;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getNomeTecnico() {
+		return nomeTecnico;
+	}
+
+	public void setNomeTecnico(String nomeTecnico) {
+		this.nomeTecnico = nomeTecnico;
+	}
+
+	@Override
+	public String toString() {
+		return "Time [nome=" + nome + ", nomeTecnico=" + nomeTecnico + "]";
+	}
+	
+	
 	
 }
 
-
 \\Principal.java
-package br.senai.poo.lista07;
+package br.senai.pa.lista07;
 
-public class Principal {
+import java.util.Iterator;
 
-    public static void main(String[] args) {
+public class Exemplo {
 
-        Time time = new Time("Barcelona", "Carlos");
+	private static String nomes[] = { "Gabriel", "Erik", "Samuel", "Luan", "Arthur" };
 
-        time.contratarJogador("Pedro", 10);
-        time.contratarJogador("Lucas", 7);
-        time.contratarJogador("João", 9);
-        time.contratarJogador("Gabriel", 11);
-        time.contratarJogador("Rafael", 5);
+	public static void main(String[] args) {
 
-        System.out.println("\nEscalando jogadores:\n");
+		Time time = new Time("Bahia", "Rogerio Ceni");
+		contratar5Jogadores(time);
+		escalar3Titulares(time);
+		escalar2Reservas(time);
+		listarJogadoresEscalados(time);
+		
+		
+		 time.contratarJogador("Gabriel", 2); 
+		 
+		 
+		  time.contratarJogador("Gabriel Rodrigues", 10); 
+		  time.contratarJogador("Erik", 9); 
+		 time.contratarJogador("Samuel", 5); 
+		 time.contratarJogador("Luan", 2); 
+		 time.contratarJogador("Arthur", 2); 
+		 
+		 
+		 time.escalarJogador("Gabriel", SituacaoEscalacaoEnum.TITULAR);
+		 time.escalarJogador("Samuel", SituacaoEscalacaoEnum.RESERVA);
+		 time.escalarJogador("Arthur", SituacaoEscalacaoEnum.RESERVA);
+		 time.escalarJogador("Luan", SituacaoEscalacaoEnum.TITULAR);
+		 time.escalarJogador("Erik", SituacaoEscalacaoEnum.TITULAR);
+		 
+		 listarJogadoresEscalados(time);
+		 
+		 
+		 
+	}
 
-        System.out.println("Pedro titular: "
-                + time.escalarJogador("Pedro", SituacaoEscalacao.TITULAR));
+	private static void contratar5Jogadores(Time time) {
+		for (Integer i = 0; i <= 4; i++) {
+			time.escalarJogador(nomes[i], SituacaoEscalacaoEnum.TITULAR);
+		}
+	}
+	private static void escalar3Titulares(Time time) {
+		for (Integer i = 0; i <= 2; i++) {
+			time.escalarJogador(nomes[i], SituacaoEscalacaoEnum.TITULAR);
+		}
+	}
+	private static void escalar2Reservas(Time time) {
+		for (Integer i = 3; i <= 4; i++) {
+			time.escalarJogador(nomes[i], SituacaoEscalacaoEnum.RESERVA);
+		}
+	}
 
-        System.out.println("Lucas titular: "
-                + time.escalarJogador("Lucas", SituacaoEscalacao.TITULAR));
+	private static void listarJogadoresEscalados(Time time) {
+		System.out.println("Jogadores Escalados:");
+		for (Jogador jogador : time.obterEscalacao()) {
+			System.out.println(jogador);
+		}
+	}
 
-        System.out.println("João titular: "
-                + time.escalarJogador("João", SituacaoEscalacao.TITULAR));
-
-        System.out.println("Gabriel reserva: "
-                + time.escalarJogador("Gabriel", SituacaoEscalacao.RESERVA));
-
-        System.out.println("Rafael reserva: "
-                + time.escalarJogador("Rafael", SituacaoEscalacao.RESERVA));
-
-        System.out.println("\nEscalação do time " + time.getNome());
-        System.out.println("Técnico: " + time.getNomeTecnico());
-
-        for (Jogador jogador : time.obterEscalacao()) {
-            System.out.println(jogador);
-        }
-    }
 }
