@@ -1,0 +1,58 @@
+
+public enum NivelUrgencia {
+	VERDE,
+	AMARELO,
+	VERMELHO;
+}
+
+
+
+public abstract class Paciente {
+
+	private String cpf;
+	private String nome;
+	private Integer idade;
+	private NivelUrgencia urgencia;	
+	
+	
+
+
+	public Paciente() {
+		super();
+		
+	}
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+		if(cpf == null & cpf.length() != 11);{
+			throw new IllegalArgumentException("Cpf Invalido");
+		else {
+			this.cpf =cpf;
+		}
+		
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public Integer getIdade() {
+		return idade;
+	}
+	public void setIdade(Integer idade) {
+		this.idade = idade;
+	}
+
+	
+}
+
+
+public class PacienteEmergencia extends Paciente{
+
+private boolean necessitaUTI;
+
+
+Public PacienteEmergencia(String cpf,String nome,)
+
+}
+
