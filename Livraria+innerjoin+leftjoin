@@ -82,12 +82,10 @@ INNER JOIN livros
     ON Emprestimos.id_livro = livros.id_livro
 WHERE Emprestimos.data_devolucao IS NULL;
 
-
 SELECT livros.nome AS livro_nao_emprestado
 FROM livros
 LEFT JOIN Emprestimos ON livros.id_livro = Emprestimos.id_livro
 WHERE Emprestimos.id_livro IS NULL;
-
 
 SELECT leitores.nome AS Leitor,
     livros.nome AS Livro_pendente,
@@ -99,3 +97,7 @@ INNER JOIN livros
    ON Emprestimos.id_livro = livro.id_livro
 WHERE Emprestimos.data_devolucao IS NULL;
 
+SELECT livros.nome AS livro_nao_emprestado
+FROM livros
+LEFT JOIN Emprestimos ON livros.id_livro = Emprestimos.id_livro
+WHERE Emprestimos.id_livro IS NULL;
