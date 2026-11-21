@@ -1,0 +1,90 @@
+CREATE DATABASE IF NOT EXISTS locadora_equipamentos;
+USE locadora_equipamentos;
+
+CREATE TABLE IF NOT EXISTS equipamentos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    valor_diaria DECIMAL(10, 2) NOT NULL,
+    disponivel CHAR(1) NOT NULL DEFAULT 'S'
+);
+
+CREATE TABLE IF NOT EXISTS historico_status (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_equip INT NOT NULL,
+    anterior CHAR(1),
+    novo CHAR(1),
+    data_hora DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO equipamentos (nome, valor_diaria, disponivel) VALUES
+('Betoneira 400L', 120.00, 'S'),
+('Martelete Rompedor', 85.00, 'S'),
+('Andaime Metálico', 35.00, 'S');
+
+DROP FUNCTION IF EXISTS fn_calcular_locacao;
+
+DELIMITER $$
+
+CREATE FUNCTION fn_calcular_locacao (
+    p_diaria DECIMAL(10, 2),
+    p_dias INT
+)
+RETURNS DECIMAL(10, 2)
+DETERMINISTIC
+BEGIN
+    DECLARE v_total DECIMAL(10, 2);
+
+    SET v_total = p_diaria * p_dias;
+
+    IF p_dias > 5 THEN
+        SET v_total = v_total * 0.85;
+    END IF;
+
+    RETURN v_total;
+END $$
+
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS sp_realizar_emprestimo;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_realizar_emprestimo (
+    IN p_id INT
+)
+BEGIN
+    UPDATE equipamentos
+    SET disponivel = 'N'
+    WHERE id = p_id;
+END $$
+
+DELIMITER ;
+
+DROP TRIGGER IF EXISTS trg_auditoria_disponibilidade;
+
+DELIMITER $$
+
+CREATE TRIGGER trg_auditoria_disponibilidade
+AFTER UPDATE ON equipamentos
+FOR EACH ROW
+BEGIN
+    IF NOT (OLD.disponivel <=> NEW.disponivel) THEN
+        INSERT INTO historico_status (id_equip, anterior, novo, data_hora)
+        VALUES (NEW.id, OLD.disponivel, NEW.disponivel, NOW());
+    END IF;
+END $$
+
+DELIMITER ;
+
+SELECT 
+    id,
+    nome,
+    valor_diaria,
+    fn_calcular_locacao(valor_diaria, 3) AS total_3_dias,
+    fn_calcular_locacao(valor_diaria, 7) AS total_7_dias
+FROM equipamentos;
+
+CALL sp_realizar_emprestimo(1);
+
+SELECT id, nome, valor_diaria, disponivel FROM equipamentos;
+SELECT id, id_equip, anterior, novo, data_hora FROM historico_status;
