@@ -1,0 +1,156 @@
+import java.util.List;
+import java.util.ArrayList;
+
+public class Collections  {
+	
+     public static void main(String [] args) {
+	  
+    	Escola senai = new Escola("senai");
+    	
+    	Aluno aluno1 = new Aluno("Erik",24,"23456789123",7.1,6.5);
+    	Aluno aluno1 = new Aluno("John",18,"23456789122",7.1,7.5);
+    	
+    	
+    	
+    	senai.adicionarAluno(aluno1);
+    	senai.adicionarAluno(aluno2);
+    	
+    	 
+     }
+}
+
+
+
+
+
+
+
+public class Aluno {
+	
+	private String nome;
+	private Integer idade;
+	private String cpf;
+	private double nota1;
+	private double nota2;
+
+	private Aluno(String nome, Integer idade, String cpf, double nota1, double nota2) {
+		super();
+		this.nome = nome;
+		this.idade = idade;
+		setCpf(cpf);
+		setNota1(nota1);
+		setNota2(nota2);
+	}
+	
+	public double calcularMedia() {
+		return(this.nota1 + this.nota2)/2;
+	}
+	private boolean validarCpf(String cpf) {
+		return cpf.length() == 11;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public Integer getIdade() {
+		return idade;
+	}
+	public void setIdade(Integer idade) {
+		this.idade = idade;
+	}
+	public String getCpf() {
+		return cpf;
+	}
+	public void setCpf(String cpf) {
+		if(validarCpf(cpf)) {
+			this.cpf = cpf;
+			
+		} else {
+			throw new IllegalArgumentException("Cpf Inavlido!");
+		}
+		
+	}
+	public double getNota1() {
+		return nota1;
+	}
+	public void setNota1(double nota1) {
+		if(nota1 >= 0 && nota1 <=10) {
+		
+		}else {
+			throw new IllegalArgumentException("Nota invalida");
+		}
+		this.nota1 = nota1;
+	}
+	public double getNota2() {
+		if (nota2 >= 0 && nota2 <= 10) {
+			
+		}else {
+			throw new IllegalArgumentException("Nota invalida");
+		}
+		return nota2;
+	}
+	public void setNota2(double nota2) {
+		this.nota2 = nota2;
+	}
+	
+	
+	
+	
+
+}
+
+
+
+
+
+import java.util.ArrayList;
+public class Escola {
+
+	private String nome;
+	private ArrayList<Aluno> alunos = new ArrayList<Aluno>();
+	
+	public Escola (String nome) {
+		this.nome = nome;
+	}
+	public void adicionarAluno(Aluno aluno) {
+		if(alunos.contains(buscarAluno(aluno.getCpf()))) {
+			System.out.println("aluno ja existente");
+		} else {
+		alunos.add(aluno);
+			System.out.println("Aluno Adicionado a escola");
+		}
+	}
+	public Aluno buscarAluno(String cpf) {
+		for (Aluno aluno : aluno) {
+			if(aluno.getCpf().equals(cpf)) {
+				System.out.println("Aluno Encontrado");
+				return aluno;
+			}
+		}
+		return null;
+	}
+	public void removerAluno(String cpf) {
+		System.out.println(a -> a.getCpf().equals(cpf)) ? "Aluno Removido" : "Aluno não Encontrado!");
+			
+		
+	}
+	
+	
+	
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public ArrayList<Aluno> getAlunos() {
+		return alunos;
+	}
+	public void setAlunos(ArrayList<Aluno> alunos) {
+		this.alunos = alunos;
+	}
+	
+	
+}
